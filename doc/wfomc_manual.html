@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>WFOMC Manual</title>
+	<meta charset="utf-8" />
+	<meta name="generator" content="articlecls" />
+	<meta name="author" content="Guy Van den Broeck" />
+	<meta name="author" content="Wannes Meert" />
+	<meta name="dcterms.issued" content="2014-01-03" />
+	<meta name="keywords" content="wfomc,srl,pll,lifted inference" />
+	<meta name="description" content="WFOMC Manual" />
+	<meta name="generator" content="Article.cls" />
+	<link rel="license" href="http://dtai.cs.kuleuven.be/wfomc/" />
+
+  <link rel="stylesheet" href="http://wannesm.be/articlecls/css/articlecls.css" type="text/css" />
+	<!--<link rel="stylesheet" href="/Users/wannes/Projects/programming/article.cls/css/articlecls.css" type="text/css" />-->
+	<link rel="stylesheet" href="css/wfomc_manual.css" type="text/css" />
+
+	<script type="text/javascript; e4x=1" src="http://wannesm.be/articlecls/js/citeproc/xmle4x.js"></script>
+	<script src="http://wannesm.be/articlecls/js/jquery-1.7.1.min.js"></script>
+  <script data-options="modern, hyphenator, altfootnotes" src="http://wannesm.be/articlecls/js/articlecls.js"></script>
+  <!--<script data-options="modern" src="/Users/wannes/Projects/programming/article.cls/js/articlecls.js"></script>-->
+
+</head>
+<body>
+<article>
+
+<!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+<section id="abstract">
+<p>
+WFOMC is an experimental tool to perform weighted model counting in a lifted manner. The tool is compatible with Markov Logic and Factor Graphs.
+</p>
+</section>
+
+<!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+<section id="toc">
+<h2 class="notoc">Table of Contents</h2>
+</section>
+
+<!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+<section>
+<h2 id=usage>Usage</h2>
+
+<p>
+Usage:
+<pre><code>java -jar ./wfomc.jar [OPTIONS] input</code></pre>
+
+<p>
+For example, to perform inference on the example model <code>sickdeath.fg</code> for the query <code>death</code>, you use the following command:
+<pre><code>java -jar ./wfomc.jar -q "death" models/sickdeath.fg</code></pre>
+
+
+<p>MLNs can be queried as follows:
+<pre><code>java -jar ./wfomc.jar -q "smokes(Guy)" models/friendsmoker.mln</code></pre>
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<section>
+<h3>Options</h3>
+
+Input files:
+<table class=options>
+  <tr><td><code>--fg</code>
+      <td>Force to read in file as a factor graph model
+  <tr><td><code>--mln</code>
+      <td>Force to read in file as MLN model
+  <tr><td><code>--wmc</code>
+      <td>Force to read in file as WMC model
+  <tr><td><code>--train filename</code>
+      <td>Database file with training data. (May be specified multiple times.)
+  <tr><td><code>--test filename</code>
+      <td>Database file with test data. (May be specified multiple times.)
+</table>
+
+Querying:
+<table class=options>
+  <tr><td><code>-q query</code><br>
+          <code>--query query</code>
+      <td>Query atom (if none given, shows all marginals).
+  <tr><td><code>--rcr</code>
+      <td>Perform &quot;Relax, Compensate and Recover&quot; approximate inference (all marginals).
+</table>
+
+Learning:
+<table class=options>
+  <tr><td><code>--wl</code>
+      <td>Learn weights (expects a database file given)
+  <tr><td><code>--ll</code>
+      <td>Database likelihood (only for MLN)
+  <tr><td><code>--pll</code>
+      <td>Database pseudo likelihood (only for MLN, only for verification
+          purposes)
+</table>
+
+Settings:
+<table class=options>
+  <tr><td><code>--propinf</code>
+      <td>Perform inference on the propositional level using the c2d compile of
+          Darwiche. The c2d compiler command can be set with environment
+          variable <code>C2DCMD</code> (default: <code>./c2d_linux</code>).
+  <tr><td><code>--mln-dist</code>
+      <td>Distribute the weight over equivalent CNF formula like Alchemy.
+          (required by weight learning)
+  <tr><td><code>--noskolemize</code>
+      <td>Do not perform first-order Skolemization but expand existential
+          quantifiers as a disjunction (only for MLNs and set to true when
+          --mln-dist is active) <a href="#arxiv-1312-5378">[arXiv 2013]</a>.
+</table>
+
+Veryfication and feedback:
+<table class=options>
+  <tr><td><code>--pdf</code>
+      <td>Create a pdf visualizing the smoothed NNF. Requires pdflatex and
+          graphviz dot to be in your path and the dot2texi package installed.
+  <tr><td><code>--verify</code>
+      <td>Verify the result of wfomc using the c2d compiler of Darwiche. The
+          c2d compiler command can be set with environment variable
+          <code>C2DCMD</code> (default: <code>./c2d_linux</code>).
+  <tr><td><code>--verbose</code>
+      <td>Verbose output on command line and in pdf
+</table>
+
+Output formats:
+<table class=options>
+  <tr><td><code>--dimacs-out</code>
+      <td>Output a given MLN to a ground <a href="http://dimacs.rutgers.edu">DIMACS</a> file.
+  <tr><td><code>--fastinf-out</code>
+      <td>Output a given MLN to the format used by the <a href="http://compbio.cs.huji.ac.il/FastInf/">FastInf</a> tool.
+  <tr><td><code>--mln-out</code>
+      <td>Output a given MLN to a ground MLN.
+</table>
+
+Various:
+<table class=options>
+    <tr><td><code>-h</code><br>
+            <code>--help</code>
+        <td>Show help about the available flags.
+</table>
+
+</section>
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<section>
+<h3>Input formats</h3>
+
+<p>
+WFOMC supports three types of input formats. Internally, all formats are translated to the weighted model counting format:
+</p>
+<ul>
+	<li><strong>Weighted Model Counting</strong> format as defined
+	<a href="#wmcformat">below</a>.<br>
+	The extension <code>.wmc</code> is associated with this filetype.
+	<li><strong>Markov Logic Networks</strong> as defined for
+	<a href="http://alchemy.cs.washington.edu">Alchemy</a>.<br>
+	There are two possible transformation from MLNs to WMC.
+	The first is where the weight is assigned to the entire formula as a whole
+	(This is similar to how
+	<a href="http://people.cs.aau.dk/~jaeger/Primula/index.html">Primula</a>
+	system interprets MLN formulas).
+	The second is a transformation to CNF as performed by Alchemy which
+	distributes the weights over the equivalent CNF clauses. This second option
+	can be activated with the flag <code>--mln-dist</code>.<br>
+	The extension <code>.mln</code> is associated with this filetype.
+	<li><strong>Factor Graphs</strong> format as defined for
+	<a href="http://www.ai.sri.com/~braz/fopi.html#lifted">FOPI</a>.<br>
+	The extension <code>.fg</code> is associated with this filetype.
+</ul>
+</section>
+</section>
+
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<h3 id="dependencies">Dependencies</h3>
+
+<ul>
+<li>For verifying the correctness of the results:
+<ul>
+<li><a href="http://reasoning.cs.ucla.edu/c2d/">c2d compiler</a>: Adnan Darwiche's c2d compiler.<br> Used for propositional inference and verification. The binary is assumed to be installed as <code>./c2d_linux</code>. This can be overridden with the environment variable <code>C2DCMD</code>.</li>
+</ul></li>
+<li>For visualizing the d-DNNFs:
+<ul>
+<li><a href="http://www.latex-project.org/">pdflatex</a><br> <code>pdflatex</code> is assumed to be in your path.</li>
+<li><a href="http://www.fauskes.net/code/dot2tex/">dot2tex</a><br> <code>dot2tex</code> is assumed to be in your path.</li>
+<li><a href="http://ftp.snt.utwente.nl/pub/software/tex/help/Catalogue/entries/dot2texi.html">dot2texi</a><br> LaTeX package assumed to be installed.</li>
+<li><a href="http://www.graphviz.org/">Graphviz</a><br> The dot2tex tool expects Graphviz <code>dot</code> to be available on your path.</li>
+</ul></li>
+<li>Included in package:
+<ul>
+<li><a href="http://software.clapper.org/argot/">Argot</a>: Used for command line parsing (BSD licensed)</li>
+<li><a href="http://factorie.cs.umass.edu">Factorie</a>: Used for optimization algorithms (Apache 2.0 licensed)</li>
+<li><a href="https://github.com/scalanlp/breeze">Breeze</a>: Used for optimization and complex numbers (Apache 2.0 License)</li>
+</ul></li>
+</ul>
+
+
+<!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+<section>
+<h2 id=download>Download</h2>
+
+<p>The WFOMC binaries can be downloaded from <a href="http://dtai.cs.kuleuven.be/wfomc/">http://dtai.cs.kuleuven.be/wfomc/</a>. Installing is not necessary, the zip-file contains a runnable jar-file.</p>
+
+</section>
+
+
+<!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+<section>
+<h2 id=wmcformat>Weighted Model Counting Input Format</h2>
+<p>
+More information about the semantics can be found in the publications
+mentioned <a href="#publications">below</a>. A theory consists out of three parts:
+</p>
+<ul>
+	<li>Domain declarations
+	<li>Predicate declarations
+	<li>Formulas
+</ul>
+
+<h3>Domain Declarations</h3>
+
+<pre><code>domain {Name} {size} \{{DomainElements}\}</code></pre>
+<p>
+Where <code>Name</code> is the name of the domain and should start with a capital letter and has a given size, <code>size</code>. It is also possible to give some domain elements explicitely by name as a comma separated list in <code>DomainElements</code>. For example,
+</p>
+<pre><code>domain D 10 {}</code></pre>
+
+<h3>Predicate Declarations</h3>
+
+<pre><code>predicate {predicate} {TrueWeight} {FalseWeight}</code></pre>
+<p>
+Where a predicate consists out of a predicate name (lowercase first letter) and optionally some arguments (e.g., <code>f(D,D)</code>). A weight can be given for when the predicate is true, <code>TrueWeight</code>, and when it is false, <code>FalseWeight</code>. For example,
+</p>
+<pre><code>predicate p(D)
+predicate r
+predicate f(D,D) 0.51 1</code></pre>
+
+<h3>Formulas</h3>
+<p>
+The third part are the first-order formulas, one per line, in CNF. Optionally you can add domain constraints to a line separated by a comma. Logic variables should start with a capital letter.
+</p>
+<p>
+Logic connectives:
+</p>
+<ul>
+	<li>Negation: <code>!</code> or <code>¬</code>
+	<li>Disjunction: <code>v</code>, <code>V</code> or <code>|</code>
+	<li>Conjunction: <code>newline</code> (conjunctive normal form)
+</ul>
+<p>
+Domain connectives:
+</p>
+<ul>
+	<li>Equality: <code>=</code>
+	<li>Inequality: <code>!=</code> or <code>≠</code>
+</ul>
+<p>
+For example:
+</p>
+<pre><code>!p(X) v !p(Y)   v !r v f(X,Y), X != Y
+p(X)  v !f(X,Y)              , X != Y
+p(Y)  v !f(X,Y)              , X != Y
+r     v !f(X,Y)              , X != Y</code></pre>
+
+</section>
+
+<!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+<section>
+<h2 id=tutorial>Tutorial on Inference</h2>
+
+<pre><code># Example theory file
+$ cat models/friendsmoker.mln
+person = {Guy, Nima, Wannes, Jesse, Luc}
+Friends(person,person)
+Smokes(person)
+2 Friends(x,y) ^ Smokes(x) =&gt; Smokes(y)
+
+# Run a query on the theory
+$ java -jar ./wfomc.jar -q "Smokes(Guy)" ./models/friendsmoker.mln
+Reading file using MLN syntax.
+Compilation took 815 ms
+evidence nnf size = 18
+evidence smooth nnf size = 24
+query nnf size = 33
+query smooth nnf size = 45
+
+Inference took 15 ms
+evidence logWmc = 68.63908810719217 = log(6.450259808376127E29)
+query logWmc = 67.94594092663222 = log(3.225129904188057E29)
+
+P(Some(Smokes(Guy))) = 0.49999999999999906
+
+# Visualize the circuit in a pdf
+$ java -jar ./wfomc-.jar --pdf ./models/friendsmoker.mln
+$ open ./nnfs/theory.smooth.nnf.pdf
+
+# Visualize the circuit in a pdf in a verbose way (show all steps)
+$ java -jar ./wfomc.jar --pdf --verbose ./models/friendsmoker.mln
+$ open ./nnfs/theory.smooth.nnf.pdf
+</code></pre>
+
+<figure>
+	<img src="img/theory.smooth.nnf.nonverbose.png" title="Visualization of compilation" width="70%" height="400px" />
+	<figcaption>Part of the visualization of the compilation of friendsmokers (non-verbose).</figcaption>
+</figure>
+
+<figure id=fig_smoothverbose>
+	<img src="img/theory.smooth.nnf.verbose.png" title="Visualization of compilation (extended)" width="70%" height="400px" />
+	<figcaption>Part of the visualization of the compilation of friendsmokers (verbose).</figcaption>
+</figure>
+
+</section>
+
+
+<!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+<h2 id="learning">Tutorial on Learning</h2>
+
+<p>To learn the weights of a theory, use the <code>--wl</code> flag and indicate the training database(s) with the <code>--train</code> flag.</p>
+<pre><code>$ java -jar ./wfomc.jar --mln-dist --wl 
+    --train models/learning/smoking/smoking-train.db 
+    models/learning/smoking/smoking.mln</code></pre>
+
+
+<!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+<section>
+<h2 id=publications>Publications</h2>
+<p>
+The algorithms implemented are explained in the following publications:
+</p>
+<ul>
+  <li id=arxiv-1312-5378 class=pub>
+      G. Van den Broeck, W. Meert and A. Adnan.
+      <strong>Skolemization for Weighted First-Order Model Counting</strong>.<br>
+      <a href="http://arxiv.org/abs/1312.5378">http://arxiv.org/abs/1312.5378</a>
+  <li id=starai2013 class=pub>
+      G. Van den Broeck, W. Meert and J. Davis.
+      <strong>Lifted Generative Parameter Learning</strong>.
+      In Proceedings of the 3rd International workshop on Statistical Relational AI (StarAI), held at the 27th AAAI Conference, 2013.
+  <li id=phdguy2013 class=pub>
+      G. Van den Broeck.
+      <strong>Lifted Inference and Learning in Statistical Relational Models</strong>.
+      PhD dissertation KU Leuven, 2013.<br/>
+      <a href="https://lirias.kuleuven.be/handle/123456789/373041">https://lirias.kuleuven.be/handle/123456789/373041</a>
+  <li id=aaai2012 class=pub>
+      G. Van den Broeck and J. Davis.
+      <strong>Conditioning in First-Order Knowledge Compilation and Lifted Probabilistic Inference</strong>.
+      In Proceedings of the 26th AAAI Conference on Artificial Intelligence (AAAI), 2012.<br>
+      <a href="https://lirias.kuleuven.be/handle/123456789/345667">https://lirias.kuleuven.be/handle/123456789/345667</a>
+  <li id=uai2012 class=pub>
+      G. Van den Broeck, A. Choi, A. Darwiche. 
+      <strong>Lifted relax, compensate and then recover: From approximate to exact lifted probabilistic inference</strong>.
+      In Proceedings of the conference on Uncertainty in Artificial Intelligence (UAI), 2012<br>
+      <a href="https://lirias.kuleuven.be/handle/123456789/351575">https://lirias.kuleuven.be/handle/123456789/351575</a>
+  <li id=starai2012 class=pub>
+      M. Jaeger, G. Van den Broeck. 
+      <strong>Liftability of probabilistic inference: Upper and lower bounds</strong>.
+      In Proceedings of the 2nd International Workshop on Statistical Relational AI (StarAI), 2012.
+      <a href="https://lirias.kuleuven.be/handle/123456789/352388">https://lirias.kuleuven.be/handle/123456789/352388</a>
+  <li id=ppw2012 class=pub>
+      W. Meert, G. Van den Broeck, N. Taghipour, D. Fierens, H. Blockeel, J. Davis, L. De Raedt. 
+      <strong>Lifted inference for probabilistic programming</strong>.
+      In Proceedings of the NIPS Probabilistic Programming Workshop, 2012.
+      <a href="https://lirias.kuleuven.be/handle/123456789/369419">https://lirias.kuleuven.be/handle/123456789/369419</a>
+  <li id=nips2011 class=pub>
+      G. Van den Broeck.
+      <strong>On the completeness of first-order knowledge compilation for lifted probabilistic inference</strong>.
+      In Proceedings of the Annual Conference on Neural Information Processing Systems (NIPS), 2011<br>
+      <a href="https://lirias.kuleuven.be/handle/123456789/316338">https://lirias.kuleuven.be/handle/123456789/316338</a>
+  <li id=ijcaitut2011 class=pub>
+      G. Van den Broeck, N. Taghipour, W. Meert, J. Davis, and L. De Raedt.
+      <strong>Tutorial on Lifted Inference in Probabilistic Logical Models</strong>.
+      On the 22th International Joint Conference on Artificial Intelligence (IJCAI), 2011. <br>
+      <a href="https://lirias.kuleuven.be/handle/123456789/317055">https://lirias.kuleuven.be/handle/123456789/317055</a>
+  <li id=ijcai2011 class=pub>
+      G. Van den Broeck, N. Taghipour, W. Meert, J. Davis, and L. De Raedt.
+      <strong>Lifted probabilistic inference by first-order knowledge compilation</strong>.
+      In Proceedings of the 22th International Joint Conference on Artificial Intelligence (IJCAI), 2011.<br>
+      <a href="https://lirias.kuleuven.be/handle/123456789/308265">https://lirias.kuleuven.be/handle/123456789/308265</a>
+</ul>
+</section>
+
+
+<!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+<section>
+<h2 id=contact>Contact</h2>
+
+<p><a href="http://dtai.cs.kuleuven.be/wfomc/">http://dtai.cs.kuleuven.be/wfomc/</a></p>
+
+<p>
+<strong>Main contact:</strong>
+</p>
+<script>articlecls.insertAddress({
+	'fn'   : 'Guy Van den Broeck',
+	'org'  : 'Departement of Computer Science, KU Leuven',
+	'adr'  : {
+		'street-address': 'Celestijnenlaan 200A',
+		'postal-code'   : '3001',
+		'locality'      : 'Leuven',
+		'country-name'  : 'België',
+	},
+	'email': 'guy.vandenbroeck@cs.kuleuven.be',
+	'url'  : 'http://www.guyvdb.eu',
+})</script>
+
+<p>
+<strong>Contributors:</strong>
+<ul>
+  <li><a href="http://guyvdb.eu">Guy Van den Broeck</a>
+  <li><a href="http://people.cs.kuleuven.be/wannes.meert">Wannes Meert</a>
+  <li><a href="http://people.cs.kuleuven.be/jesse.davis">Jesse Davis</a>
+  <li><a href="http://people.cs.kuleuven.be/jan.vanhaaren">Jan Van Haaren</a>
+</ul>
+
+</section>
+
+
+<!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+<section>
+<h2>License</h2>
+
+<p>
+The Lesser GNU Public License, Version 3.0<br>
+<a href="http://www.gnu.org/licenses/lgpl-3.0.txt">http://www.gnu.org/licenses/lgpl-3.0.txt</a>
+</p>
+<p>
+Copyright (c) 2011-2013, KU Leuven. All rights reserved.
+</p>
+</section>
+
+<!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+</article>
+</body>
+</html>
+

@@ -1,0 +1,5 @@
+HasTa(page)
+PageClassStudent(page)
+Linked(page,page)
+
+HasTa(p1) <=> PageClassStudent(p1)

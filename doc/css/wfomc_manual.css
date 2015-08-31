@@ -1,0 +1,42 @@
+/* Extra CSS for WFOMC manual. */
+
+/* Colored titles */
+h2, h3, h4 {
+	color: #104a84;
+}
+
+/* Colored bullets for lists */
+ul {
+  list-style: none;
+  margin-left: .5em;
+  padding-left: 1em;
+}
+
+li::before {
+  color: #104a84;
+}
+
+ul>li::before {
+  content: "•";
+  font-size: large;
+  margin-left: -1.0em;
+  position:absolute;
+}
+
+/* Options table */
+
+table.options {
+  width: 100%;
+}
+
+table.options td {
+	padding-bottom: .8em;
+}
+
+table.options tr:nth-child(odd)    { background-color:#eee; }
+table.options tr:nth-child(even)    { background-color:#fff; }
+
+table.options td:first-child {
+  width: 30%;
+}
+

@@ -1,0 +1,11 @@
+//predicate declaration
+professor(person)
+student(person)
+advisedBy(person, person)
+publication(title, person)
+inPhase(person, phase)
+hasPosition(person, position)
+
+//function declarations
+person motherOf(person)
+

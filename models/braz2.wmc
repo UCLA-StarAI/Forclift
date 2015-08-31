@@ -1,0 +1,10 @@
+domain D 10 {}
+
+predicate p(D)
+predicate r
+predicate f(D,D) 0.51 1
+
+!p(X) v !p(Y) v !r v f(X,Y), X != Y
+p(X) v !f(X,Y), X != Y
+p(Y) v !f(X,Y), X != Y
+r v !f(X,Y), X != Y

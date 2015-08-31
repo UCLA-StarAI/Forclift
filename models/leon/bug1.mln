@@ -1,0 +1,5 @@
+person = {1,...,5}
+
+friends(person,person)
+
+[ forall x friends(x,x) ] ^ [ forall x forall y friends(x,y) => friends(y,x) ].

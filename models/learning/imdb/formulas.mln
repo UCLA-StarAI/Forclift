@@ -1,0 +1,12 @@
+workedUnder(person,person)
+movie(film,person)
+director(person)
+male(person)
+genre(person,type)
+actor(person)
+
+!movie(a1,a2) v !movie(a3,a2)
+!workedUnder(a1,a2) v !male(a2)
+movie(a1,a2) v !movie(a3,a2)
+workedUnder(a1,a2) v director(a2) v genre(a2,a3) v !actor(a2)
+

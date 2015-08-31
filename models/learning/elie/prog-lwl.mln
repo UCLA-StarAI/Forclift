@@ -1,0 +1,13 @@
+
+IsA(type)
+FromCluster(cluster,type)
+FromSentence(sentence,type)
+FromModifier(modifier,type)
+
+-5.717529763288551 FromSentence(x,y)
+0.44715086439317225 IsA(x)
+-6.318050707611571 FromModifier(x,y)
+-5.580148182054526 FromCluster(x,y)
+0.7270559229453745 (((!FromSentence(x,y) v !FromSentence(x,z)) v !IsA(y)) v IsA(z))
+0.6645439298720737 (((!FromModifier(x,y) v !FromModifier(x,z)) v !IsA(y)) v IsA(z))
+0.7472908000273928 (((!FromCluster(x,y) v !FromCluster(x,z)) v !IsA(y)) v IsA(z))

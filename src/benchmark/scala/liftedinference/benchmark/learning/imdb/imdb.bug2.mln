@@ -1,0 +1,11 @@
+//predicate declarations
+workedUnder(person,person)
+male(person)
+
+-0.982392  workedUnder(a1,a2)
+0.501532   male(a1)
+// This formula fails
+0.63635    workedUnder(a1,a2) v !workedUnder(a3,a2) v male(a1) v !male(a2)
+// The following formula works
+//0.63635    workedUnder(a1,a2) v !workedUnder(a3,a2) v male(a1) v !male(a3)
+

@@ -1,0 +1,9 @@
+person = { Ada, Alan, Alex, Alice, Andy, 
+           Bart, Becca, Betty, Bill, Bob, 
+           Carl, Carol, Cathy, Charles, Claire }
+
+title = { Title1, Title2, Title3, Title4, Title5, Title6, Title7,Title8,Title9 }
+
+phase = { Pre_Quals, Post_Quals }
+
+position = { Faculty, Faculty_emeritus }

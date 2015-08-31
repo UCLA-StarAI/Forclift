@@ -1,0 +1,19 @@
+Tempadvisedby(person,person)
+Yearsinprogram(person,num)
+level= {}
+year= {}
+course= {}
+Publication(title,person)
+num= {}
+person= {}
+Professor(person)
+title= {}
+Advisedby(person,person)
+Taughtby(course,person,year)
+Courselevel(course,level)
+Ta(course,person,year)
+phase= {}
+Phase(person,phase)
+
+!Publication(v0,v1) v Publication(v2,v1)
+!Taughtby(v0,v1,v2) v Professor(v1)

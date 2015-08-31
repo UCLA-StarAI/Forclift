@@ -1,0 +1,21 @@
+//predicate declarations
+workedUnder(person,person)
+movie(film,person)
+director(person)
+male(person)
+genre(person,type)
+actor(person)
+
+-0.600298  actor(a1)
+//-0.0184935 workedUnder(a1,a1)
+-0.965606  movie(a1,a2)
+-0.785605  genre(a1,a2)
+-1.01473   workedUnder(a1,a2)
+0.334604   male(a1)
+-2.36553   director(a1)
+1.1838     !workedUnder(a1,a2) v director(a2)
+0.709929   genre(a1,a2) v !genre(a1,a3)
+0.535228   workedUnder(a1,a2) v !male(a2) v !genre(a2,a3)
+0.662852   workedUnder(a1,a2) v !workedUnder(a3,a2) v male(a1) v actor(a3)
+0.707813   workedUnder(a1,a2) v !workedUnder(a3,a2) v male(a1) v !male(a2)
+

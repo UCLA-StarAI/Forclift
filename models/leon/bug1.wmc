@@ -1,0 +1,5 @@
+domain D 5 {1,2,3,4,5}
+
+predicate f(D,D) 1 1
+
+[ forall x f(x,x) ] ^ [ forall x forall y f(x,y)=>f(y,x) ].

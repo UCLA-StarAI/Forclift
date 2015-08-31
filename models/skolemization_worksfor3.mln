@@ -1,0 +1,18 @@
+person = {Guy, Nima, Wannes, Jesse, Luc}
+
+worksFor(person,person)
+boss(person)
+p(person) 3.6692966676192444 1.0
+z(person) 1.0 1.0
+s(person) 1.0 -1.0
+
+p(x) v !z(x).
+!p(x) v z(x).
+s(x) v !worksFor(x,y).
+s(x) v !boss(x).
+s(x) v z(x).
+z(x) v !worksFor(x,y).
+z(x) v !boss(x).
+
+
+

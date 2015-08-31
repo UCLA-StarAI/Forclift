@@ -1,0 +1,4 @@
+person = {Guy, Nima, Wannes, Jesse, Luc}
+friends(person,person)
+smokes(person)
+friends(x,y) ^ smokes(x) => smokes(y)

@@ -1,0 +1,10 @@
+person = {Guy, Nima, Wannes, Jesse, Luc}
+
+worksFor(person,person)
+boss(person)
+p(person) 3.6692966676192444 1.0
+
+p(x) <=> exist y worksFor(x,y) v boss(x).
+
+
+

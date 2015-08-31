@@ -1,0 +1,10 @@
+//
+// P(friends(Guy,Nima))  = 0.4580488556024473
+// P(smokes(Guy))        = 0.49999999999999906
+// P(friends(Nima,Nima)) = 0.49999999999999906
+//
+
+person = {Guy, Nima, Wannes, Jesse, Luc}
+friends(person,person)
+smokes(person)
+2 friends(x,y) ^ smokes(x) => smokes(y)

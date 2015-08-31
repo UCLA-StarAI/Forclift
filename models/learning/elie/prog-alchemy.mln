@@ -1,0 +1,27 @@
+//predicate declarations
+FromSentence(sentence,factID)
+FromModifier(modifier,factID)
+FromCluster(cluster,factID)
+IsA(factID)
+
+// 0.711476  !FromSentence(s,x) v !FromSentence(s,y) v !IsA(x) v IsA(y)
+0.711476  IsA(a1) v !IsA(a2) v !FromSentence(a3,a1) v !FromSentence(a3,a2)
+
+// 0.0892783  !FromModifier(m,x) v !FromModifier(m,y) v !IsA(x) v IsA(y)
+0.0892783  IsA(a1) v !IsA(a2) v !FromModifier(a3,a1) v !FromModifier(a3,a2)
+
+// 0.393432  !FromCluster(c,x) v !FromCluster(c,y) v !IsA(x) v IsA(y)
+0.393432  IsA(a1) v !IsA(a2) v !FromCluster(a3,a1) v !FromCluster(a3,a2)
+
+// 0.720267  IsA(a1)
+0.720267  IsA(a1)
+
+// -5.57379  FromSentence(a1,a2)
+-5.57379  FromSentence(a1,a2)
+
+// -6.1071  FromModifier(a1,a2)
+-6.1071  FromModifier(a1,a2)
+
+// -5.48441  FromCluster(a1,a2)
+-5.48441  FromCluster(a1,a2)
+

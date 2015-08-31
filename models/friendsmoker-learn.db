@@ -1,0 +1,5 @@
+friends(Guy,Nima)
+friends(Nima,Wannes)
+friends(Jesse,Luc)
+smokes(Wannes)
+smokes(Nima)

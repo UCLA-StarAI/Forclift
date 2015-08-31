@@ -1,0 +1,10 @@
+domain Person 10 {}
+
+predicate series
+predicate attr1
+predicate attr2
+predicate attends(Person)
+
+attends(P) and series 0.501 0.499
+attends(P) and attr1 0.7 0.3
+attends(P) and attr2 0.7 0.3

@@ -1,0 +1,29 @@
+// Declarations
+IsA(type)
+FromSentence(sentence, type)
+FromModifier(modifier, type)
+FromCluster(cluster, type)
+
+
+// Is(x, y) ^ Is(y, z) => Is(x, z)
+//!IsA(a1,a2) v !IsA(a2,a3) v IsA(a1,a3).
+
+// Is(x, y) => -Is(y, x)
+//!IsA(a1,a2) v !IsA(a2,a1).
+
+// -Is(x, x)
+//!IsA(a1,a1).
+
+
+// FromSentence(s, x, y), FromSentence(s, z, w) => (IsA(x,y) <=> IsA(z,w))
+!FromSentence(s, x) v !FromSentence(s, y) v !IsA(x) v IsA(y)
+
+// FromModifier(m, x, y), FromModifier(m, z, w) => (IsA(x,y) <=> IsA(z,w))
+!FromModifier(m, x) v !FromModifier(m, y) v !IsA(x) v IsA(y)
+
+// FromCluster(c, x, y), FromCluster(c, z, w) => (IsA(x,y) <=> IsA(z,w))
+!FromCluster(c, x) v !FromCluster(c, y) v !IsA(x) v IsA(y)
+
+
+
+

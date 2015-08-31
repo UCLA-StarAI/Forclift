@@ -1,0 +1,10 @@
+//These are query atoms whose values are TRUE. They do not appear in 
+//univ-test.db. You can search for the probabilities of these atoms in 
+//univ.results to see how well they are predicted.
+
+advisedBy(Hanna, Gail)
+advisedBy(Ivy, Glen)
+professor(Gail)
+professor(Glen)
+student(Hanna)
+student(Ivy)

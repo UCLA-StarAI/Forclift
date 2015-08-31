@@ -1,0 +1,9 @@
+domain Person 15 {}
+domain Workshop 5 {}
+
+predicate series
+predicate hot(Workshop)
+predicate attends(Person)
+
+hot(W) and attends(P) 0.2 0.8
+attends(P) and series 0.501 0.499

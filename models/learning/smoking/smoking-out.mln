@@ -1,0 +1,24 @@
+//predicate declarations
+Cancer(person)
+Friends(person,person)
+Smokes(person)
+
+// 6.18039  Smokes(x) => Cancer(x)
+6.18039  !Smokes(a1) v Cancer(a1)
+
+// 1.22424  Friends(x,y) => (Smokes(x) <=> Smokes(y))
+0.61212  !Friends(a1,a2) v Smokes(a1) v !Smokes(a2)
+0.61212  !Friends(a1,a2) v Smokes(a2) v !Smokes(a1)
+
+// 9.67615  Friends(x,y) => Friends(y,x)
+9.67615  Friends(a1,a2) v !Friends(a2,a1)
+
+// -4.20887  Friends(a1,a2)
+-4.20887  Friends(a1,a2)
+
+// 5.13753  Smokes(a1)
+5.13753  Smokes(a1)
+
+// -6.17535  Cancer(a1)
+-6.17535  Cancer(a1)
+

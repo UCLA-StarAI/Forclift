@@ -1,0 +1,9 @@
+publication(Title10, Gail)
+publication(Title11, Glen)
+publication(Title10, Hanna)
+publication(Title11, Ivy)
+inPhase(Hanna, Pre_Quals)
+inPhase(Ivy, Post_Quals)
+hasPosition(Gail, Faculty)
+hasPosition(Glen, Faculty_emeritus)
+

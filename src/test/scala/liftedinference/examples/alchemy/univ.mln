@@ -1,0 +1,55 @@
+//predicate declarations
+professor(person)
+student(person)
+advisedBy(person, person)
+publication(title, person)
+inPhase(person, phase)
+hasPosition(person, position)
+
+//formulas
+professor(p) <=> !student(p)
+
+advisedBy(s,p) => student(s) ^ professor(p)
+
+inPhase(s, +ph) => student(s)
+
+hasPosition(p, +pos) => professor(p)
+
+publication(t,p) ^ publication(t,s) ^ professor(p) ^ student(s) ^ !(s = p) =>
+  advisedBy(s,p)
+
+advisedBy(s,p) ^ hasPosition(p,+q) => inPhase(s, +r)
+
+*inPhase(s, Pre_Quals) v *inPhase(s, Post_Quals)
+
+/******************** more examples  ******************/
+/*
+//you can specify a prior weight for a formula
+1.23 professor(p) => !student(p)
+
+//you can specify a hard formula by terminating it with a period
+professor(p) => !student(p).
+
+//but you CANNOT specify both a weight and period
+//1.23 professor(p) => !student(p).
+
+EXIST s,p advisedBy(s,p)
+
+FORALL s EXIST p advisedBy(s,p)
+
+//you can use internal predicates and functions
+(z < x) ^ (z < y) => (z + z) < (x + y)
+//a domain for the type int must be defined
+int = {1,...,10}
+
+//you can declare linked-in functions
+//the functions min and max are defined in functions.cpp
+#include "functions.cpp"
+int min(int, int)
+int max(int, int)
+//a domain for the type int must be defined
+int = {1,...,10}
+
+min(x,y) <= max(x,y)
+
+*/

@@ -1,0 +1,33 @@
+Example models for WFOMC
+========================
+
+MLN
+---
+
+Examples using the Markov Logic Network syntax.
+
+- friendsmoker.mln
+
+WMC
+---
+
+Examples using the Weighted Model Count syntax used for WFOMC.
+
+- braz2.wmc
+
+FG
+--
+
+Examples using the Factor Graph format according de Braz.
+
+- competingworkshops.fg
+- friendsmokerdrinker.fg
+- sickdeath.fg
+- workshopattributes.fg
+
+Usage
+-----
+
+    java -jar ./wfomc-1.0-SNAPSHOT.jar -h
+    java -jar ./wfomc-1.0-SNAPSHOT.jar -q "death" models/sickdeath.fg
+

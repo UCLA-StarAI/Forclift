@@ -1,0 +1,9 @@
+domain Person 4 {}
+
+predicate epidemic
+predicate death
+predicate sick(Person)
+
+epidemic 0.55 0.45
+if epidemic then sick(P) 0.7 else 0.01
+if sick(P) then death 0.6

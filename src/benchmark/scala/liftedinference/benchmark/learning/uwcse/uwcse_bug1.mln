@@ -1,0 +1,16 @@
+Advisedby(person,person)
+Taughtby(course,person,year)
+Publication(title,person)
+Level_400(course)
+Professor(person)
+Post_quals_9(person)
+Level_500(course)
+Post_generals_9(person)
+Ta(course,person,year)
+Yearsinprogram(person,num)
+Tempadvisedby(person,person)
+Student(person)
+
+-3.13985   !Taughtby(a1,a2,a3) v !Level_400(a1) v Level_500(a1) v Student(a2) v !Professor(a2)
+-2.73872   Student(a1) v !Professor(a1) v Post_generals_9(a1) v Post_quals_9(a1) v Yearsinprogram(a1,a2)
+

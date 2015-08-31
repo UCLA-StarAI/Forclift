@@ -1,0 +1,11 @@
+domain Person 8 {guy, luc, bert}
+
+predicate smokes(Person)
+predicate drinks(Person)
+predicate friends(Person,Person)
+
+!friends(X,Y) v !smokes(X) v smokes(Y) 1.2 1
+!friends(X,Y) v !drinks(X) v drinks(Y) 1.2 1
+drinks(guy)
+drinks(luc)
+smokes(luc)

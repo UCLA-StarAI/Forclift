@@ -1,0 +1,12 @@
+director(person)
+actor(person)
+movie(title, person)
+gender(person, gend)
+workedUnder(person, person)
+genre(person, genr)
+samePerson(person, person)
+sameMovie(title, title)
+sameGenre(genr, genr)
+sameGender(gend, gend)
+
+!genre(a1,a2) v !workedUnder(a1,a1)
