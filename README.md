@@ -1,7 +1,3 @@
-% Weighted FO Model Counting (WFOMC)
-% Guy Van den Broeck, Wannes Meert, Jan Van Haaren @ KU Leuven
-% August 2015
-
 Summary
 =======
 
@@ -158,4 +154,3 @@ Copyright (c) 2011-2015, KU Leuven. All rights reserved.
 ---
 
 vim:ft=markdown:norl:expandtab:textwidth=78
-
