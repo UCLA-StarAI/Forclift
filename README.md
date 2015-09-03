@@ -150,7 +150,3 @@ Licensed under the Apache License, Version 2.0:
 http://www.apache.org/licenses/LICENSE-2.0
 
 Copyright (c) 2011-2015, KU Leuven. All rights reserved.
-
----
-
-vim:ft=markdown:norl:expandtab:textwidth=78
