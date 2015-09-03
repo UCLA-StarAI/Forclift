@@ -31,9 +31,3 @@ Packaging
 Eclipse IDE
 ------------
 - `sbt eclipse` - Create Eclipse .project files
-
-
----
-
-vim:ft=markdown:expandtab
-
