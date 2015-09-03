@@ -1,7 +1,5 @@
-% WFOMC development instructions
-
-SBT
-===
+WFOMC development instructions (SBT)
+====================================
 
 Last tested with Java 7, Scala 2.11.2, and SBT 0.13.6.
 
