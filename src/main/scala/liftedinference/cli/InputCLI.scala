@@ -134,24 +134,30 @@ class InputCLI(argumentParser: ArgotParser, debugCLI: DebugCLI) {
    * Read in the model using command line flags
    */
   lazy val (model,parser): (StatRelModel,ModelParser) = {
-    
-    val theoryStr = Source.fromFile(inputFile).mkString
-    if (theoryStr.length == 0) {
-      inputFileFlag.parent.usage(s"Input file $inputFile is empty.")
+
+    val theoryFile = Source.fromFile(inputFile)
+    try {
+      val theoryStr = theoryFile.mkString
+      if (theoryStr.length == 0) {
+        inputFileFlag.parent.usage(s"Input file $inputFile is empty.")
+      }
+
+      println(s"Reading model using $inputFileFormat syntax.")
+      val (model, parser) = inputFileFormat match {
+        case FileFormat.FOCNF => parseFOCNF(theoryStr)
+        case FileFormat.MLN => parseMLN(theoryStr)
+        case FileFormat.FactorGraph => parseFactorGraph(theoryStr)
+        case _ => throw new UnsupportedOperationException(s"Could not find parser for $inputFileFormat")
+      }
+      if (debugCLI.verbose) {
+        println("Done parsing model:")
+        println(model)
+      }
+      (model, parser)
     }
-    
-    println(s"Reading model using $inputFileFormat syntax.")
-    val (model,parser) = inputFileFormat match{
-      case FileFormat.FOCNF => parseFOCNF(theoryStr)
-      case FileFormat.MLN => parseMLN(theoryStr)
-      case FileFormat.FactorGraph => parseFactorGraph(theoryStr)
-      case _ => throw new UnsupportedOperationException(s"Could not find parser for $inputFileFormat")
+    finally {
+      theoryFile.close()
     }
-    if (debugCLI.verbose) {
-      println("Done parsing model:")
-      println(model)
-    }
-    (model,parser)
   }
   
   lazy val wcnfModel: WeightedCNF = model
@@ -181,22 +187,28 @@ class InputCLI(argumentParser: ArgotParser, debugCLI: DebugCLI) {
    * Read in the model structure (for learning) using command line flags
    */
   lazy val (modelStructure,structureParser): (StatRelModel,ModelParser) = {
-    
-    val theoryStr = Source.fromFile(inputFile).mkString
-    if (theoryStr.length == 0) {
-      inputFileFlag.parent.usage(s"Input file $inputFile is empty.")
+
+    val theoryFile = Source.fromFile(inputFile)
+    try {
+      val theoryStr = theoryFile.mkString
+      if (theoryStr.length == 0) {
+        inputFileFlag.parent.usage(s"Input file $inputFile is empty.")
+      }
+
+      println(s"Reading model structure using $inputFileFormat syntax.")
+      val (modelStructure, structureParser) = inputFileFormat match {
+        case FileFormat.MLN => parseMLNStructure(theoryStr)
+        case _ => throw new UnsupportedOperationException(s"Could not find parser for $inputFileFormat structures (for learning)")
+      }
+      if (debugCLI.verbose) {
+        println("Done parsing model structure:")
+        println(modelStructure)
+      }
+      (modelStructure, structureParser)
     }
-    
-    println(s"Reading model structure using $inputFileFormat syntax.")
-    val (modelStructure,structureParser) = inputFileFormat match{
-      case FileFormat.MLN => parseMLNStructure(theoryStr)
-      case _ => throw new UnsupportedOperationException(s"Could not find parser for $inputFileFormat structures (for learning)")
+    finally {
+      theoryFile.close()
     }
-    if (debugCLI.verbose) {
-      println("Done parsing model structure:")
-      println(modelStructure)
-    }
-    (modelStructure,structureParser)
   }
   
   def parseMLNStructure(theoryStr: String): (MLN,ModelParser) = {
@@ -216,7 +228,14 @@ class InputCLI(argumentParser: ArgotParser, debugCLI: DebugCLI) {
   def parseMLNDatabases()= {
     val mlnStructParser = structureParser.asInstanceOf[MLNParser]
     val trainDbMlns = trainDbFiles.map { file =>
-      mlnStructParser.parseDB(Source.fromFile(file).mkString) }
+      val trainFile = Source.fromFile(file)
+      try {
+        mlnStructParser.parseDB(trainFile.mkString)
+      }
+      finally {
+        trainFile.close()
+      }
+    }
       if (debugCLI.verbose) {
         for (dbMln <- trainDbMlns) {
           println("Parsed training db with domains:")
@@ -225,7 +244,14 @@ class InputCLI(argumentParser: ArgotParser, debugCLI: DebugCLI) {
         }
       }
     val testDbMlns = testDbFiles.map { file =>
-      mlnStructParser.parseDB(Source.fromFile(file).mkString) }
+      val testFile = Source.fromFile(file)
+      try {
+        mlnStructParser.parseDB(testFile.mkString)
+      }
+      finally {
+        testFile.close()
+      }
+    }
       if (debugCLI.verbose) {
         for (dbMln <- testDbMlns) {
           println("Parsed testing db with domains:")

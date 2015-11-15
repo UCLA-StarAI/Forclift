@@ -679,8 +679,14 @@ class MLNParser extends JavaTokenParsers with ModelParser {
       case filename => {
         //println("Currently in directory: "+System.getProperty("user.dir"))
         //println("Trying to open file: "+filename)
-        val filelines = scala.io.Source.fromFile(filename).mkString
-        parseAll(anyLines, rmCommentBlocks(filelines)).get
+        val inputfile = scala.io.Source.fromFile(filename)
+        try {
+          val filelines = inputfile.mkString
+          parseAll(anyLines, rmCommentBlocks(filelines)).get
+        }
+        finally {
+          inputfile.close()
+        }
       }
     })
 
