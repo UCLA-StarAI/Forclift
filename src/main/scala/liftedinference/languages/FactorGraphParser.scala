@@ -140,12 +140,14 @@ class FactorGraphParser extends JavaTokenParsers with ModelParser{
   val predicate = """([a-z0-9_{}])+""".r
   
   def parseFactorGraph(str: String): FactorGraph = {
-    val graphfile = Source.fromString(str)
+    val sourceFile = Source.fromString(str)
     try {
-      parseFactorGraph(graphfile)
+      parseFactorGraph(sourceFile)
+    } catch {
+      case e: Exception => throw new Exception(s"can't read file $str")
     }
     finally {
-      graphfile.close()
+      sourceFile.close()
     }
   }
 

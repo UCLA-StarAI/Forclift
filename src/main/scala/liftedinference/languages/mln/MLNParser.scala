@@ -683,6 +683,8 @@ class MLNParser extends JavaTokenParsers with ModelParser {
         try {
           val filelines = inputfile.mkString
           parseAll(anyLines, rmCommentBlocks(filelines)).get
+        } catch {
+          case e: Exception => throw new Exception(s"can't read file $filename")
         }
         finally {
           inputfile.close()

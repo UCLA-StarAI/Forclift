@@ -154,6 +154,8 @@ class InputCLI(argumentParser: ArgotParser, debugCLI: DebugCLI) {
         println(model)
       }
       (model, parser)
+    } catch {
+      case e: Exception => throw new Exception(s"can't read file $inputFile")
     }
     finally {
       theoryFile.close()
@@ -205,6 +207,8 @@ class InputCLI(argumentParser: ArgotParser, debugCLI: DebugCLI) {
         println(modelStructure)
       }
       (modelStructure, structureParser)
+    } catch {
+      case e: Exception => throw new Exception(s"can't read file $inputFile")
     }
     finally {
       theoryFile.close()
@@ -231,6 +235,8 @@ class InputCLI(argumentParser: ArgotParser, debugCLI: DebugCLI) {
       val trainFile = Source.fromFile(file)
       try {
         mlnStructParser.parseDB(trainFile.mkString)
+      } catch {
+        case e:Exception => throw new Exception(s" something wrong with file $file")
       }
       finally {
         trainFile.close()
@@ -247,6 +253,8 @@ class InputCLI(argumentParser: ArgotParser, debugCLI: DebugCLI) {
       val testFile = Source.fromFile(file)
       try {
         mlnStructParser.parseDB(testFile.mkString)
+      } catch {
+        case e: Exception => throw new Exception(s"something wrong with file $file")
       }
       finally {
         testFile.close()
