@@ -16,6 +16,8 @@
 
 package liftedinference.languages.mln
 
+import java.io.{FileNotFoundException, IOException}
+
 import collection._
 import scala.util.parsing.combinator._
 import scala.io._
@@ -684,7 +686,8 @@ class MLNParser extends JavaTokenParsers with ModelParser {
           val filelines = inputfile.mkString
           parseAll(anyLines, rmCommentBlocks(filelines)).get
         } catch {
-          case e: Exception => throw new Exception(s"can't read file $filename")
+          case e: IOException => throw new Exception(s"Problem with file $filename: " + e.getMessage)
+          case e: FileNotFoundException => throw new Exception(s"Can't find file $filename")
         }
         finally {
           inputfile.close()

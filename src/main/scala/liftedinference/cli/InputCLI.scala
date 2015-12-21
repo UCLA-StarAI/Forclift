@@ -16,7 +16,7 @@
 
 package liftedinference.cli
 
-import java.io.File
+import java.io.{FileNotFoundException, IOException, File}
 
 import scala.io.Source
 import org.clapper.argot.ArgotConverters._
@@ -208,7 +208,8 @@ class InputCLI(argumentParser: ArgotParser, debugCLI: DebugCLI) {
       }
       (modelStructure, structureParser)
     } catch {
-      case e: Exception => throw new Exception(s"can't read file $inputFile")
+      case e: IOException => throw new Exception(s"Problem with the file $inputFile: " + e.getMessage)
+      case e: FileNotFoundException => throw new Exception(s"Can't find file $inputFile")
     }
     finally {
       theoryFile.close()
