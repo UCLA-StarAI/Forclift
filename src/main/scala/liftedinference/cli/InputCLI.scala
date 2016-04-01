@@ -54,7 +54,12 @@ class InputCLI(argumentParser: ArgotParser, debugCLI: DebugCLI) {
           argumentParser.usage("Input file \"" + s + "\" does not exist.")
         file
     }
-  def inputFile: File = inputFileFlag.value.get
+  def inputFile: File = {
+    if (inputFileFlag.value.isEmpty) {
+      throw new Exception("No filename given")
+    }
+    inputFileFlag.value.get 
+  }
   
   def inputFileExtension: String = {
     val extregex = """.*\.([^.]+)""".r
@@ -225,7 +230,7 @@ class InputCLI(argumentParser: ArgotParser, debugCLI: DebugCLI) {
     (mln,parser)
   }
   
-  val (trainDbMlns, testDbMlns) = inputFileFormat match{
+  lazy val (trainDbMlns, testDbMlns) = inputFileFormat match{
       case FileFormat.MLN => parseMLNDatabases()
       case _ => throw new UnsupportedOperationException(s"Could not find parser for $inputFileFormat databases (for learning)")
     }
