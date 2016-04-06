@@ -185,7 +185,7 @@ class LearningCLI(
     if (inputCLI.testDbMlns.isEmpty) {
       argumentParser.usage("No test database files given for likelihood evaluation.")
     }
-    val mln = inputCLI.model.asInstanceOf[MLN]
+    val mln = inputCLI.modelStructure.asInstanceOf[MLN]
     Likelihood.mlnLikelihood(
       mln,
       inputCLI.testDbMlns,
@@ -197,7 +197,7 @@ class LearningCLI(
     if (inputCLI.testDbMlns.isEmpty) {
       argumentParser.usage("No test database files given for pseudolikelihood evaluation.")
     }
-    val mln = inputCLI.model.asInstanceOf[MLN]
+    val mln = inputCLI.modelStructure.asInstanceOf[MLN]
     Likelihood.mlnPseudoLikelihood(
       mln,
       inputCLI.testDbMlns,
