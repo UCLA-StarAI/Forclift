@@ -160,7 +160,7 @@ class InputCLI(argumentParser: ArgotParser, debugCLI: DebugCLI) {
       }
       (model, parser)
     } catch {
-      case e: Exception => throw new Exception(s"can't read file $inputFile")
+      case e: Exception => throw new Exception(s"can't read file $inputFile: ${e.getMessage}")
     }
     finally {
       theoryFile.close()
