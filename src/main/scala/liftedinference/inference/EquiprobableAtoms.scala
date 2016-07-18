@@ -35,7 +35,7 @@ class EquiprobableAtoms(val weightedCNF: WeightedCNF, val verbose: Boolean = fal
   val originalPredicateWeights = weightedCNF.predicateWeights
 
   val (factors, fgPredicates) = {
-    val (factors, fgPredicates) = weightedCNF.vocabularyPredicates.partition { _.toString.startsWith("f_{") }
+    val (factors, fgPredicates) = weightedCNF.vocabularyPredicates.partition { _.toString.startsWith("f_") }
     if (verbose) {
       println("Factors")
       println(factors.mkString("\n"))

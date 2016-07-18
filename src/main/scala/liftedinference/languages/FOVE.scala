@@ -35,7 +35,7 @@ class ResNameSpace extends NameSpace[BrazFactor, String] {
 
   override def createName(f: BrazFactor) = {
     nbPredicates += 1
-    "f_{" + nbPredicates
+    "f_" + nbPredicates
   }
 
 }

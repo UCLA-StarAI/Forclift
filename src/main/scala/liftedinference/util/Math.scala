@@ -211,11 +211,15 @@ final class SignLogDouble(_pos: Boolean, val ld: LogDouble) extends Ordered[Sign
 
   def log: SignLogDouble = {
     require(pos)
-    new SignLogDouble(pos,ld.log)
+    if (ld.v < 0.0) { // TODO: can be implemented more principled
+      new SignLogDouble(false, new LogDouble(math.log(-ld.v)))
+    } else {
+      new SignLogDouble(pos,ld.log)
+    }
   }
   
   def logToDouble: Double = {
-    require(pos)
+    require(pos, s"Expected a positive number, got $ld")
     ld.logToDouble
   }
   

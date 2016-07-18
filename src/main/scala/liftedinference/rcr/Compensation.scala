@@ -56,7 +56,9 @@ class Compensation(
   }
 
   def logConverged(a: SignLogDouble, b: SignLogDouble, logPrecision: Double) = {
-    (a - b).logToDouble < logPrecision
+    val c = a-b
+//    println(s"$a - $b = $c < $logPrecision")
+    !c.pos || c.logToDouble < logPrecision // TODO: can become negative, correct?
   }
 
   def updateThetaCopy(weights: PredicateWeights, logDamping: (SignLogDouble, SignLogDouble), logPrecision: Double) = {
@@ -110,7 +112,7 @@ class Compensation(
     //    def logdiff(a: Double,b:Double) = if(a>b) logminusexp(a,b) else logminusexp(b,a)
     //    import math.exp
     //    val sum = exp(logdiff(origMarginal.logMarginal,copyMarginal.logMarginal)) + exp(logdiff(origMarginal.logMarginal,logdivexp(trueParams, norm))) + exp(logdiff(copyMarginal.logMarginal,logdivexp(trueParams, norm)))
-    require((!double2Double(sum).isNaN) && sum >= 0)
+    require((!double2Double(sum).isNaN) && sum >= 0, s"Sum is not a valid number: $sum = $trueKLD + $falseKLD")
     sum
   }
 
