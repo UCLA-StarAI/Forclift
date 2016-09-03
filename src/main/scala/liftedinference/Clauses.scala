@@ -93,6 +93,8 @@ class Clause(
 
   def isTautology = posLits.exists { l1 => negLits.exists { l2 => (l1 == l2) } }
 
+  def isGround = atoms.forall { _.isGround }
+  
   /**
    * Get a most general unifier of the given atom with a literal that is not yet shattered w.r.t. the given constraints.
    * A set of equivalence classes needs shattering when

@@ -45,6 +45,8 @@ class QueryProbExact(
   def computeQueryProb(wcnf: WeightedCNF, query: PositiveUnitClause): SignLogDouble = {
 
     println(s"Running first-order knowledge compilation")
+        
+    require(query.isGround, s"Query $query is not ground")
     
     val queryWcnf = wcnf.addConstraint(query)
     
@@ -87,6 +89,8 @@ class QueryProbC2D(
     
     println(s"Running C2D (propositonal inference)")
       
+    require(query.isGround, s"Query $query is not ground")
+    
     val queryWcnf = wcnf.addConstraint(query)
 
     val wmc = wcnf.logPropWmc

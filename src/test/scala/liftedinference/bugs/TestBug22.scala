@@ -35,32 +35,49 @@ import liftedinference.languages.mln.MLNParser
 @RunWith(classOf[JUnitRunner])
 class TestBug22 extends ModelBehaviours {
 
-	describe("Bug22Model") {
+  describe("Bug22Model") {
 
-		val theoryString = s"""
-person = {alice, bob,charlie}
-friends(person,person)
-0.5 !friends(x,y) v friends(y,x)
+    val theoryString = s"""
+person = {Alice,Bob,Charlie}
+Friends(person,person)
+0.5 !Friends(x,y) v Friends(y,x)
 """
 
-		val parser = new MLNParser
-		val model: WeightedCNF = parser.parseModel(theoryString + "\n")
-		val query = parser.parseAtom("friends(alice,misterx)").toPositiveUnitClause
+    val parser = new MLNParser
+    val model: WeightedCNF = parser.parseModel(theoryString + "\n")
+
+    it("An exception should be thrown when posing a non-ground query (lifted)") {
+      intercept[IllegalArgumentException] {
+        val nonGroundQuery = parser.parseAtom("Friends(x,y)").toPositiveUnitClause
+        val algo = new QueryProbExact(false)
+        algo.computeQueryProb(model, nonGroundQuery)
+      }
+    }
+
+    it("An exception should be thrown when posing a non-ground query (propositional)") {
+      intercept[IllegalArgumentException] {
+        val nonGroundQuery = parser.parseAtom("Friends(x,y)").toPositiveUnitClause
+        val algo = new QueryProbC2D(false)
+        algo.computeQueryProb(model, nonGroundQuery)
+      }
+    }
 
 
-  it("An exception should be thrown when querying with additional constant (lifted)") {
-			intercept[IllegalArgumentException] { 
-				val algo = new QueryProbExact(false)
-				algo.computeQueryProb(model, query)
-			}
-		}
+    it("An exception should be thrown when querying with additional constant (lifted)") {
+      intercept[IllegalArgumentException] {
+        val query = parser.parseAtom("Friends(Alice,Misterx)").toPositiveUnitClause
+        val algo = new QueryProbExact(false)
+        algo.computeQueryProb(model, query)
+      }
+    }
 
-		it("An exception should be thrown when querying with additional constant (propositional)") {
-			intercept[IllegalArgumentException] { 
-				val algo = new QueryProbC2D(false)
-				algo.computeQueryProb(model, query)
-			}
-		}
-	}
+    it("An exception should be thrown when querying with additional constant (propositional)") {
+      intercept[IllegalArgumentException] {
+        val query = parser.parseAtom("Friends(Alice,Misterx)").toPositiveUnitClause
+        val algo = new QueryProbC2D(false)
+        algo.computeQueryProb(model, query)
+      }
+    }
+  }
 
 }

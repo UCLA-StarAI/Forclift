@@ -257,7 +257,7 @@ class MLNParser extends JavaTokenParsers with ModelParser {
         //val predicate = predicateMap.getOrElseUpdate((name,arglist.size), new Predicate(Symbol(name),arglist.size))
         val predicate = predicateMap.getOrElse((name, arglist.size), {
           // @todo Hack to reduce stacktrace, should be solved more nicely
-          var exc = new IllegalStateException("Unknown predicate " + name + "/" + arglist.size)
+          var exc = new IllegalArgumentException("Unknown predicate " + name + "/" + arglist.size)
           // WHY DO WE HAVE THIS??? - Guy
           //            exc.setStackTrace(Array(new StackTraceElement("MLNParser", "ParseAtom", "MLNParser", 0) ))
           throw exc
@@ -297,7 +297,7 @@ class MLNParser extends JavaTokenParsers with ModelParser {
           (arglist zip predicate.domains).foreach {
             case (a, d) =>
               if (a.isInstanceOf[Constant] && !d.contains(a.asInstanceOf[Constant])) {
-                throw new IllegalStateException("Constant " + a + " is not a constant in domain " + d + ".")
+                throw new IllegalArgumentException("Constant " + a + " is not a constant in domain " + d + ".")
               }
           }
         }
