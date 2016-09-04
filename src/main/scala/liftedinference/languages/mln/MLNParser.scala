@@ -171,6 +171,10 @@ class MLNParser extends JavaTokenParsers with ModelParser {
     }
     val subs = subDomainMap.values.map {
       case (d, p, s) =>
+        if (s == 0) {
+          println(s"WARNING: Subdomain $d has size zero (if constants are "+
+                   "intended they should start with an uppercase letter)")
+        }
         (d.asInstanceOf[Domain], DomainSize(s, d.asInstanceOf[Domain], Set()))
     }
 //    println(subDomainMap)
