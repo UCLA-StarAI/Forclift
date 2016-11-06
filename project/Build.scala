@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Guy Van den Broeck and Wannes Meert
+ * Copyright 2016 Guy Van den Broeck and Wannes Meert (UCLA and KU Leuven)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -129,8 +129,8 @@ object BuildSettings {
 
   lazy val headerSettings = List(
       HeaderPlugin.autoImport.headers := Map(
-        "scala" -> Apache2_0("2015", "Guy Van den Broeck and Wannes Meert"),
-        "java" -> Apache2_0("2015", "Jan Van Haaren")
+        "scala" -> Apache2_0("2016", "Guy Van den Broeck and Wannes Meert (UCLA and KU Leuven)"),
+        "java" -> Apache2_0("2016", "Jan Van Haaren (KU Leuven)")
       )
     )
 }
