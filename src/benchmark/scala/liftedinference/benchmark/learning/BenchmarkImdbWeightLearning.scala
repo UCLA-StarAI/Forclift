@@ -23,11 +23,11 @@ import org.scalatest.FunSpec
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.Matchers
 
-import liftedinference._
-import liftedinference.learning._
-import liftedinference.util.LogOps._
-import liftedinference.languages.mln._
-import liftedinference.inference._
+import edu.ucla.cs.starai.forclift._
+import edu.ucla.cs.starai.forclift.learning._
+import edu.ucla.cs.starai.forclift.util.LogOps._
+import edu.ucla.cs.starai.forclift.languages.mln._
+import edu.ucla.cs.starai.forclift.inference._
 
 @RunWith(classOf[JUnitRunner])
 class BenchmarkImdbWeightLearning extends FunSpec with Matchers {
