@@ -46,7 +46,9 @@ object ExternalBinaries {
     "C2D",
     (if (getenv("C2DCMD") == null) "./external/c2d_linux" else getenv("C2DCMD")),
     (if (getenv("C2DCMD") == null) "./external/c2d_linux" else getenv("C2DCMD")),
-    "Cannot find or execute c2d compiler. Make sure you are on a linux system and the executable is installed as ./c2d_linux or set the C2DCMD environment variable to a correct path.",
+    """Cannot find or execute c2d compiler. Make sure you are on a linux system 
+       and the executable is installed as ./c2d_linux or set the C2DCMD environment 
+       variable to a correct path.""",
     1)
   lazy val pdflatex = ExternalBinary(
     "pdflatex",
