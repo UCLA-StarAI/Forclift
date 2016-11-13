@@ -21,7 +21,7 @@ import org.junit.runner.RunWith
 import org.scalatest.Matchers
 import org.scalatest.Spec
 import org.scalatest.FunSpec
-import edu.ucla.cs.starai.forclift.cli.WFOMC
+import edu.ucla.cs.starai.forclift.cli.CLI
 
 @RunWith(classOf[JUnitRunner])
 class TestScalaTest extends FunSpec with Matchers {
