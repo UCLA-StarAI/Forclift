@@ -16,21 +16,15 @@
 
 package edu.ucla.cs.starai.forclift.learning
 
-import scala.io._
-
 import org.junit.runner.RunWith
 import org.scalatest.FunSpec
 import org.scalatest.Matchers
 import org.scalatest.junit.JUnitRunner
 
-import edu.ucla.cs.starai.forclift._
-import edu.ucla.cs.starai.forclift.inference._
-import edu.ucla.cs.starai.forclift.languages.mln._
-import edu.ucla.cs.starai.forclift.learning._
-import edu.ucla.cs.starai.forclift.util.Resource
+import edu.ucla.cs.starai.forclift.languages.mln.MLN
 
 @RunWith(classOf[JUnitRunner])
-class BenchmarkImdbWeightLearning extends FunSpec with Matchers with ResourceParseHelper {
+class TestImdbWeightLearning extends FunSpec with Matchers with ResourceParseHelper {
 
   //--------------------------------------------------------------------------
   println("Running from directory:")

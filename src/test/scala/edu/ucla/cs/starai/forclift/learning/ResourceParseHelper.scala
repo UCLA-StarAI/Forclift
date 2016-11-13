@@ -18,7 +18,6 @@ package edu.ucla.cs.starai.forclift.learning
 
 import edu.ucla.cs.starai.forclift.languages.mln.MLNParser
 import edu.ucla.cs.starai.forclift.languages.mln.MLN
-import scala.io.Source
 import edu.ucla.cs.starai.forclift.util.Resource
 
 /**

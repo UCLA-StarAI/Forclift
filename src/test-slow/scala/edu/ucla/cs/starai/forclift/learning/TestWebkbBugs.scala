@@ -16,25 +16,18 @@
 
 package edu.ucla.cs.starai.forclift.learning
 
-import edu.ucla.cs.starai.forclift._
-import edu.ucla.cs.starai.forclift.learning._
-import edu.ucla.cs.starai.forclift.languages.mln._
-import edu.ucla.cs.starai.forclift.inference._
-
-
+import org.junit.runner.RunWith
+import org.scalatest.BeforeAndAfter
 import org.scalatest.FunSpec
 import org.scalatest.Matchers
-import org.scalatest.BeforeAndAfter
-
-import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 
-import java.io._
-import scala.io._
-import edu.ucla.cs.starai.forclift.util.Resource
+import edu.ucla.cs.starai.forclift._
+import edu.ucla.cs.starai.forclift.inference._
+import edu.ucla.cs.starai.forclift.languages.mln._
 
 @RunWith(classOf[JUnitRunner])
-class BenchmarkWebkbBugs extends FunSpec with Matchers with ResourceParseHelper{
+class TestWebkbBugs extends FunSpec with Matchers with ResourceParseHelper{
 
   //--------------------------------------------------------------------------
   println("Running from directory:")
