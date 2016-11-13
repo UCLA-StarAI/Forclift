@@ -21,7 +21,6 @@ import org.junit.runner.RunWith
 import org.scalatest.Matchers
 import org.scalatest.Spec
 
-import edu.ucla.cs.starai.forclift.examples.models.Braz2Model;
 import edu.ucla.cs.starai.forclift._
 
 @RunWith(classOf[JUnitRunner])
