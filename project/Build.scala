@@ -138,10 +138,6 @@ object BuildSettings {
         "java" -> Apache2_0("2016", "Jan Van Haaren (KU Leuven)")
       )
     )
-    
-  lazy val eclipseSettings = List(
-       EclipseKeys.createSrc := EclipseCreateSrc.Default + EclipseCreateSrc.ManagedClasses
-    )
    
   import ExtraCommands._
   lazy val customCommands = Seq(dist,stats,upload)
@@ -188,7 +184,6 @@ object WFOMCBuild extends Build {
     .settings(headerSettings: _*)
     .settings(headerSettings: _*)
     .settings(createAllHeaders: _*)
-    //.settings(eclipseSettings: _*)
 }
 
 

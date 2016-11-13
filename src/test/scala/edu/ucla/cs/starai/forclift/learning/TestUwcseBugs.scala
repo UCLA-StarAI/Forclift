@@ -20,8 +20,8 @@ import org.junit.runner.RunWith
 import org.scalatest.FunSpec
 import org.scalatest.Matchers
 import org.scalatest.junit.JUnitRunner
-
 import edu.ucla.cs.starai.forclift.languages.mln.MLN
+import org.scalatest.Finders
 
 @RunWith(classOf[JUnitRunner])
 class TestUwcseBugs extends FunSpec with Matchers with ResourceParseHelper {

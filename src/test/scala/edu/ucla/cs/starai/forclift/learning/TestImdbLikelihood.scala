@@ -31,7 +31,7 @@ import java.io.File
 import edu.ucla.cs.starai.forclift.util.Resource
 
 @RunWith(classOf[JUnitRunner])
-class TestImdbWeightLearning extends FunSpec with Matchers with ResourceParseHelper {
+class TestImdbLikelihood extends FunSpec with Matchers with ResourceParseHelper {
   
   //--------------------------------------------------------------------------
   println("Running from directory:")
@@ -40,25 +40,43 @@ class TestImdbWeightLearning extends FunSpec with Matchers with ResourceParseHel
   var db   = MLN()
 
   //--------------------------------------------------------------------------
-  
-	describe("IMDB bug3") {
 
-		it("MLN and DB are parsable") {
-			parse("/imdb/imdb.bug3.mln","/imdb/imdb.1.db") match {
-					case (m,d) => mln=m;db=d
-			}
-		}
-		
-//		it("Compilable") {
-//			mln.toWeightedCNF(false).showNnfPdf(false, 10, "bug", true)
-//		}
-		
+    describe("IMDB bug JanVH") {
 
-		it("Learnable") {
-			val learner = new LiftedLearning(mln, Seq(db), verbose=true)
-			val learnedMLN = learner.learnParameters()
-			println(learnedMLN)
-		}
-	}
+        val parser = new MLNParser
+        val parsere = new MLNParser
+        parser.setLearnModus(true)
+        parsere.setLearnModus(true)
+        // Smoking MLN
+        val mlnFile = Resource.fromFile("/imdb/imdb.janvh1.mln")
+        val mlnStr = mlnFile.mkString
+        // Database file for training
+        val dbFile = Resource.fromFile("/imdb/imdb.db")
+        val dbStr = dbFile.mkString
+
+        var mln  = MLN()
+        var db   = MLN()
+
+        it("MLN is parsable") {
+            //println("Testing MLN:\n"+mlnStr)
+            mln = parser.parseMLN(mlnStr)
+            //println(mln)
+        }
+
+        it("DB is parsable") {
+            db = parser.parseDB(dbStr)
+        }
+
+        it("Should have correct pseudo-likelihood") {
+            val pllstat = Likelihood.mlnPseudoLikelihood(mln, Seq(db), normalizepll=true)
+            pllstat.head.logToDouble should be (-6.93147 +- 0.01)
+        }
+
+        it("Should have correct likelihood") {
+          val llstat = Likelihood.mlnLikelihood(mln, Seq(db))
+          println("ll = %f" format llstat.head.logToDouble)
+          llstat.head.logToDouble should be (-5597.856630202117 +- 0.01)
+        }
+    }
 
 }
