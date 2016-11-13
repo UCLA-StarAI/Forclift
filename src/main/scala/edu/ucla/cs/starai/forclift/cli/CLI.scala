@@ -30,13 +30,16 @@ import edu.ucla.cs.starai.forclift.languages.mln._
 import edu.ucla.cs.starai.forclift.learning.Likelihood
 import edu.ucla.cs.starai.forclift.languages.focnf._
 
-object WFOMC extends App {
+object CLI extends App {
 
   assertFalse()
 
   val argumentParser = new ArgotParser("wfomc", false, 80,
-    Some("Version 3.0"),
-    Some("EXAMPLE\n\njava -jar ./wfomc.jar -q \"smokes(Guy)\" ./models/friendsmoker.mln\njava -jar ./wfomc.jar -q \"smokes(Guy)\" ./models/friendsmoker.mln"), true)
+    Some("Version 3.1"),
+    Some(
+"""EXAMPLE
+java -jar forclift.jar -q "smokes(Guy)" ./models/friendsmoker.mln
+java -jar forclift.jar -q "smokes(Guy)" ./models/friendsmoker.mln"""), true)
 
   val debugCLI = new DebugCLI(argumentParser)
   val inputCLI = new InputCLI(argumentParser,debugCLI)

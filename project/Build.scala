@@ -41,12 +41,12 @@ import com.typesafe.sbteclipse.plugin.EclipsePlugin._
 
 object BuildSettings {
   
-  val buildName         = "wfomc"
-  val buildOrganization = "be.kuleuven.cs.dtai"
+  val buildName         = "forclift"
+  val buildOrganization = "edu.ucla.cs.starai"
   val buildScalaVersion = "2.11.2"
   val buildScalaVersionMajor = "2.11"
-  val buildVersion      = "3.0"
-  val buildMainClass    = "liftedinference.cli.WFOMC"
+  val buildVersion      = "3.1"
+  val buildMainClass    = "edu.ucla.cs.starai.forclift.cli.CLI"
   val buildJarName      = buildName+"-"+buildVersion+".jar"
   val buildJarNameDebug = buildName+"-"+buildVersion+"-debug"+".jar"
   val productionScalacFlags = Seq(
@@ -82,15 +82,9 @@ object BuildSettings {
       // do not run tests tagged as 'Slow'
       testOptions in Test += Tests.Argument("-l", "org.scalatest.tags.Slow")
   )
-  
-  lazy val docSettings = Seq(
-//       scalacOptions in (Compile, doc) ++= Opts.doc.title("WFOMC") ++
-//                                           Opts.doc.sourceUrl("file://€{FILE_PATH}.scala") ++
-//                                           Opts.doc.version(buildVersion)
-  )
-  
+    
   lazy val sCoverageSettings = instrumentSettings ++ Seq(
-    ScoverageKeys.excludedPackages in ScoverageCompile := "liftedinference.examples.*;",
+    ScoverageKeys.excludedPackages in ScoverageCompile := "udy.ucla.cs.starai.forclift.examples.*;",
     // re-enable highlighting when running scala > 2.11.0 (was disabled because of bug)
     ScoverageKeys.highlighting := true,
     // here, add flags (++=) because otherwise instrumentation fails?
@@ -177,7 +171,6 @@ object WFOMCBuild extends Build {
     .settings(compileSettings:_*)
     .settings(testSettings:_*)
     .settings(sCoverageSettings: _*)
-    .settings(docSettings:_*)
     .settings(proguardSettings: _*)
     .settings(assemblySettings: _*)
     .settings(headerSettings: _*)

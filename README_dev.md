@@ -1,7 +1,7 @@
 WFOMC development instructions (SBT)
 ====================================
 
-Last tested with Java 7, Scala 2.11.2, and SBT 0.13.6.
+Last tested with Java 8, Scala 2.11.7, and SBT 0.13.12.
 
 Compiling
 ---------
@@ -22,7 +22,7 @@ Note: `sbt test` has assertions disabled; `sbt scoverage:test` has assertions en
 Packaging
 ---------
 - `sbt createAllHeaders`  - Updates all source file headers (copyright)
-- `sbt assembly`          - Create jar file to distribute
+- `sbt assembly`          - Create jar file to distribute, including all dependencies
 - `sbt proguard:proguard` - Create jar file to distribute using Proguard
 - `sbt dist`              - Create zip file to distribute
 
