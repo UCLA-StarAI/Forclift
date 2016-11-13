@@ -37,9 +37,12 @@ object CLI extends App {
   val argumentParser = new ArgotParser("wfomc", false, 80,
     Some("Version 3.1"),
     Some(
-"""EXAMPLE
+"""
+EXAMPLE
+
 java -jar forclift.jar -q "smokes(Guy)" ./models/friendsmoker.mln
-java -jar forclift.jar -q "smokes(Guy)" ./models/friendsmoker.mln"""), true)
+java -jar forclift.jar -q "smokes(Guy)" ./models/friendsmoker.mln
+"""), true)
 
   val debugCLI = new DebugCLI(argumentParser)
   val inputCLI = new InputCLI(argumentParser,debugCLI)
