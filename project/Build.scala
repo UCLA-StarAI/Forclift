@@ -205,7 +205,7 @@ object ExtraCommands {
     * can be uploaded to the website.
    **/
   def dist = Command.command("dist") { state =>
-    val distdir = "wfomc-"+BuildSettings.buildVersion
+    val distdir = BuildSettings.buildName+"-"+BuildSettings.buildVersion
     //val curDir = System.getProperty("user.dir")
     val curdir:String = ("""pwd""" !!)
     println(curdir)
@@ -260,7 +260,7 @@ object ExtraCommands {
   }
 
   def upload = Command.command("upload") { state =>
-    val distdir = "wfomc-"+BuildSettings.buildVersion
+    val distdir = BuildSettings.buildName+"-"+BuildSettings.buildVersion
     println("Copying to server.")
     println(("scp "+distdir+".zip ssh.cs.kuleuven.be:/cw/vwww/dtai/public_html/WFOMC/" !!))
     println("Copied.")

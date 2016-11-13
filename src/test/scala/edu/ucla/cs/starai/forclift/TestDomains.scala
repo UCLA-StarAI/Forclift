@@ -25,8 +25,6 @@ import org.scalatest.Matchers
 import org.scalatest.Spec
 import org.scalatest.FunSpec
 
-import edu.ucla.cs.starai.forclift.RootDomain;
-
 @RunWith(classOf[JUnitRunner])
 class TestDomains extends FunSpec with Matchers {
 

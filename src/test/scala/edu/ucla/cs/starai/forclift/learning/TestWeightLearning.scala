@@ -31,8 +31,6 @@ import scala.io._
 
 import org.scalatest.FunSpec
 
-import edu.ucla.cs.starai.forclift.learning.LiftedLearning;
-
 @RunWith(classOf[JUnitRunner])
 class TestWeightLearning extends FunSpec with Matchers {
 

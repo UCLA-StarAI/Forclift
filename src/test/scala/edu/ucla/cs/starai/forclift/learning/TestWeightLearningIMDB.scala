@@ -26,9 +26,6 @@ import org.scalatest.Matchers
 import org.scalatest.Spec
 import org.scalatest._
 
-import edu.ucla.cs.starai.forclift.learning.Databases;
-import edu.ucla.cs.starai.forclift.learning.LiftedLearning;
-
 import java.io._
 
 import scala.io._

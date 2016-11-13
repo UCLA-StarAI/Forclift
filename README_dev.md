@@ -23,7 +23,7 @@ Packaging
 ---------
 - `sbt createAllHeaders`  - Updates all source file headers (copyright)
 - `sbt assembly`          - Create jar file to distribute, including all dependencies
-- `sbt proguard:proguard` - Create jar file to distribute using Proguard, including only the dependencies that are used
+- `sbt proguard:proguard` - Create jar file to distribute using Proguard, including minimal depencencies
 - `sbt dist`              - Create zip file to distribute
 
 Eclipse IDE

@@ -44,7 +44,7 @@ class TestScalaTest extends FunSpec with Matchers {
     
     it("should have assertions enabled in main classes") {
       intercept[AssertionError] {
-    	WFOMC.assertFalse
+    	CLI.assertFalse
       }
     }
     

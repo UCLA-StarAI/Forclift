@@ -26,10 +26,6 @@ import edu.ucla.cs.starai.forclift.inference._
 
 import org.scalatest.FunSpec
 
-import edu.ucla.cs.starai.forclift.PositiveUnitClause;
-import edu.ucla.cs.starai.forclift.Predicate;
-import edu.ucla.cs.starai.forclift.RootDomain;
-import edu.ucla.cs.starai.forclift.Var;
 
 @RunWith(classOf[JUnitRunner])
 class TestPositiveUnitClause extends FunSpec with Matchers {

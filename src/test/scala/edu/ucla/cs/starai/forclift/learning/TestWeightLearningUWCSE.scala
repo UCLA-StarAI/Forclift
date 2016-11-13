@@ -31,7 +31,6 @@ import scala.io._
 
 import org.scalatest.FunSpec
 
-import edu.ucla.cs.starai.forclift.learning.LiftedLearning;
 import edu.ucla.cs.starai.forclift.util.Resource
 
 @RunWith(classOf[JUnitRunner])

@@ -25,7 +25,6 @@ import constraints._
 
 import org.scalatest.FunSpec
 
-import edu.ucla.cs.starai.forclift.Var;
 
 @RunWith(classOf[JUnitRunner])
 class TestIneqConstr extends FunSpec with Matchers {

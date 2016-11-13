@@ -25,8 +25,6 @@ import org.junit.runner.RunWith
 import org.scalatest.Matchers
 import org.scalatest.FunSpec
 
-import edu.ucla.cs.starai.forclift.learning.LiftedLearning;
-
 import java.io._
 
 import scala.io._
