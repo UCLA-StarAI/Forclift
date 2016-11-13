@@ -49,13 +49,17 @@ object BuildSettings {
   val buildMainClass    = "edu.ucla.cs.starai.forclift.cli.CLI"
   val buildJarName      = buildName+"-"+buildVersion+".jar"
   val buildJarNameDebug = buildName+"-"+buildVersion+"-debug"+".jar"
+  val jreTargetVersion  = "1.7"
+  val javacFlags = Seq("-source", jreTargetVersion, "-target", jreTargetVersion)
   val productionScalacFlags = Seq(
+          "-target:jvm-"+jreTargetVersion,   
           "-encoding", "UTF8",
           "-optimise", 
           "-Xelide-below", "3000", 
           "-Xdisable-assertions"
   )
   val testScalacFlags = Seq(
+          "-target:jvm-"+jreTargetVersion,
           "-encoding", "UTF8",
           "-optimise"
   )
@@ -71,12 +75,14 @@ object BuildSettings {
       // Compile options
       mainClass in Compile := Some(buildMainClass),
       // disable assertions and optimize in final binaries
+      javacOptions ++= javacFlags,
       scalacOptions in Compile ++= productionScalacFlags
   )
   
   lazy val testSettings = Seq(
       // show durations and full strack traces (scalatest options)
       testOptions in Test += Tests.Argument("-oDF"),
+      javacOptions ++= javacFlags,
       // enable assertions and optimize in test binaries
       scalacOptions in Test := testScalacFlags,
       // do not run tests tagged as 'Slow'
