@@ -8,6 +8,9 @@
 # hide external dependency directory
 external/*
 
+# hide distribution output
+forclift-*
+
 # sbt specific
 .cache
 .history
