@@ -16,21 +16,18 @@
 
 package edu.ucla.cs.starai.forclift.learning
 
-import edu.ucla.cs.starai.forclift._
-import edu.ucla.cs.starai.forclift.learning._
-import edu.ucla.cs.starai.forclift.languages.mln._
-import edu.ucla.cs.starai.forclift.inference._
-
-
+import scala.io._
+import org.junit.runner.RunWith
 import org.scalatest.FunSpec
 import org.scalatest.Matchers
-
-import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-
-import java.io._
-import scala.io._
+import edu.ucla.cs.starai.forclift._
+import edu.ucla.cs.starai.forclift.inference._
+import edu.ucla.cs.starai.forclift.languages.mln._
+import edu.ucla.cs.starai.forclift.learning._
 import edu.ucla.cs.starai.forclift.util.Resource
+import org.scalatest.tagobjects.Slow
+import org.scalatest.Finders
 
 @RunWith(classOf[JUnitRunner])
 class TestIMDBBug2 extends FunSpec with Matchers {
@@ -38,7 +35,7 @@ class TestIMDBBug2 extends FunSpec with Matchers {
     println("Running from directory:")
     println(System.getProperty("user.dir"))
 
-    describe("IMDB bug2") {
+    describe("IMDB bug2")  {
 
         val parser = new MLNParser
         val parsere = new MLNParser
@@ -64,13 +61,11 @@ class TestIMDBBug2 extends FunSpec with Matchers {
             db = parser.parseDB(dbString)
         }
 
-        it("Learnable") {
+        it("Learnable", Slow)  {
             val learner = new LiftedLearning(mln, Seq(db), verbose=true)
             val learnedMLN = learner.learnParameters()
-
             println(learnedMLN)
         }
     }
 }
 
-// vim: set ts=4 sw=4 et:

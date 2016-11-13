@@ -20,18 +20,12 @@ import org.junit.runner.RunWith
 import org.scalatest.FunSpec
 import org.scalatest.Matchers
 import org.scalatest.junit.JUnitRunner
-
+import org.scalatest.tagobjects.Slow
 import edu.ucla.cs.starai.forclift.languages.mln.MLN
-
-import org.scalatest.concurrent.TimeLimitedTests
-import org.scalatest.time.SpanSugar._
-import edu.ucla.cs.starai.forclift.languages.mln.MLNParser
-import scala.io.Source
-import java.io.File
-import edu.ucla.cs.starai.forclift.util.Resource
+import org.scalatest.Finders
 
 @RunWith(classOf[JUnitRunner])
-class TestImdbBug3 extends FunSpec with Matchers with ResourceParseHelper {
+class TestIMDBBug3 extends FunSpec with Matchers with ResourceParseHelper {
   
   //--------------------------------------------------------------------------
   println("Running from directory:")
@@ -54,7 +48,7 @@ class TestImdbBug3 extends FunSpec with Matchers with ResourceParseHelper {
 //		}
 		
 
-		it("Learnable") {
+		it("Learnable", Slow) {
 			val learner = new LiftedLearning(mln, Seq(db), verbose=true)
 			val learnedMLN = learner.learnParameters()
 			println(learnedMLN)

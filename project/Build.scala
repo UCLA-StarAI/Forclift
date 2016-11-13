@@ -79,9 +79,8 @@ object BuildSettings {
       testOptions in Test += Tests.Argument("-oDF"),
       // enable assertions and optimize in test binaries
       scalacOptions in Test := testScalacFlags,
-      // add slow tests
-      unmanagedSourceDirectories in Test <++=  baseDirectory( base => Seq("scala", "java") map (base / "src" / "test-slow" / _ )),
-      unmanagedResourceDirectories in Test += baseDirectory.value / "src" / "test-slow" / "resources"
+      // do not run tests tagged as 'Slow'
+      testOptions in Test += Tests.Argument("-l", "org.scalatest.tags.Slow")
   )
   
   lazy val docSettings = Seq(
