@@ -22,6 +22,7 @@ import org.scalatest.Matchers
 import org.scalatest.junit.JUnitRunner
 import edu.ucla.cs.starai.forclift.languages.mln.MLN
 import org.scalatest.Finders
+import org.scalatest.tagobjects.Slow
 
 @RunWith(classOf[JUnitRunner])
 class TestUwcseBugs extends FunSpec with Matchers with ResourceParseHelper {
@@ -43,7 +44,7 @@ class TestUwcseBugs extends FunSpec with Matchers with ResourceParseHelper {
       }
     }
 
-    it("Learnable") {
+    it("Learnable", Slow) {
       val learner = new LiftedLearning(mln, Seq(db), verbose=true)
       val learnedMLN = learner.learnParameters()
       println(learnedMLN)
