@@ -103,6 +103,7 @@ object BuildSettings {
   )
 
   lazy val proguardSettings =  SbtProguard.proguardSettings ++ Seq(
+      ProguardKeys.proguardVersion in Proguard := "5.3.1",
       options in Proguard += keepMain(buildMainClass),
       options in Proguard ++= Seq("-dontnote", "-dontwarn", "-ignorewarnings"),
       options in Proguard += """-dontoptimize""",
