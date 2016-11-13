@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Guy Van den Broeck and Wannes Meert
+ * Copyright 2016 Guy Van den Broeck and Wannes Meert (UCLA and KU Leuven)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -125,4 +125,3 @@ class BenchmarkWebkbBugs extends FunSpec with Matchers with ResourceParseHelper{
     }
   }
 }
-
