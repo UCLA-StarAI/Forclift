@@ -14,23 +14,23 @@
  * limitations under the License.
  */
 
-package liftedinference.benchmark.learning
+package edu.ucla.cs.starai.forclift.learning
 
 import scala.io._
 
 import org.junit.runner.RunWith
 import org.scalatest.FunSpec
-import org.scalatest.junit.JUnitRunner
 import org.scalatest.Matchers
+import org.scalatest.junit.JUnitRunner
 
 import edu.ucla.cs.starai.forclift._
-import edu.ucla.cs.starai.forclift.learning._
-import edu.ucla.cs.starai.forclift.util.LogOps._
-import edu.ucla.cs.starai.forclift.languages.mln._
 import edu.ucla.cs.starai.forclift.inference._
+import edu.ucla.cs.starai.forclift.languages.mln._
+import edu.ucla.cs.starai.forclift.learning._
+import edu.ucla.cs.starai.forclift.util.Resource
 
 @RunWith(classOf[JUnitRunner])
-class BenchmarkImdbWeightLearning extends FunSpec with Matchers {
+class BenchmarkImdbWeightLearning extends FunSpec with Matchers with ResourceParseHelper {
 
   //--------------------------------------------------------------------------
   println("Running from directory:")
@@ -38,16 +38,6 @@ class BenchmarkImdbWeightLearning extends FunSpec with Matchers {
   var mln  = MLN()
   var db   = MLN()
 
-  def parse(mlnfile: String, dbfile: String): (MLN,MLN) = {
-    val parser = new MLNParser
-    parser.setLearnModus(true)
-    val mlnstring = Source.fromFile(mlnfile).mkString
-    val dbstring = Source.fromFile(dbfile).mkString
-
-    val mln = parser.parseMLN(mlnstring)
-    val db = parser.parseDB(dbstring)
-    (mln,db)
-  }
   //--------------------------------------------------------------------------
 
 //    describe("IMDB bug JanVH") {
@@ -91,8 +81,7 @@ class BenchmarkImdbWeightLearning extends FunSpec with Matchers {
 	describe("IMDA bug3") {
 
 		it("MLN and DB are parsable") {
-			parse("./src/benchmark/scala/liftedinference/benchmark/learning/imdb/imdb.bug3.mln",
-					"./src/benchmark/scala/liftedinference/benchmark/learning/imdb/imdb.1.db") match {
+			parse("/imdb/imdb.bug3.mln","/imdb/imdb.1.db") match {
 					case (m,d) => mln=m;db=d
 			}
 		}

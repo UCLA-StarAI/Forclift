@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-package liftedinference.benchmark.learning
+package edu.ucla.cs.starai.forclift.learning
 
 import edu.ucla.cs.starai.forclift._
 import edu.ucla.cs.starai.forclift.learning._
 import edu.ucla.cs.starai.forclift.languages.mln._
 import edu.ucla.cs.starai.forclift.inference._
-import edu.ucla.cs.starai.forclift.util.LogOps._
 
-import cc.factorie.optimize._
 
 import org.scalatest.FunSpec
 import org.scalatest.Matchers
@@ -32,6 +30,7 @@ import org.scalatest.junit.JUnitRunner
 
 import java.io._
 import scala.io._
+import edu.ucla.cs.starai.forclift.util.Resource
 
 @RunWith(classOf[JUnitRunner])
 class BenchmarkWeightLearning extends FunSpec with Matchers {
@@ -46,11 +45,11 @@ class BenchmarkWeightLearning extends FunSpec with Matchers {
         parser.setLearnModus(true)
         parsere.setLearnModus(true)
         // Smoking MLN
-        val mlnFile = new File("./src/benchmark/scala/liftedinference/benchmark/learning/imdb/imdb.bug2.mln")
-        val mlnString = Source.fromFile(mlnFile).mkString
+        val mlnFile = "/imdb/imdb.bug2.mln"
+        val mlnString = Resource.fromFile(mlnFile).mkString
         // Database file for training
-        val dbFile = new File("./src/benchmark/scala/liftedinference/benchmark/learning/imdb/imdb.bug2.db")
-        val dbString = Source.fromFile(dbFile).mkString
+        val dbFile = "/imdb/imdb.bug2.db"
+        val dbString = Resource.fromFile(dbFile).mkString
 
         var mln  = MLN()
         var db   = MLN()

@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-package liftedinference.benchmark.learning
+package edu.ucla.cs.starai.forclift.learning
 
 import edu.ucla.cs.starai.forclift._
 import edu.ucla.cs.starai.forclift.learning._
 import edu.ucla.cs.starai.forclift.languages.mln._
 import edu.ucla.cs.starai.forclift.inference._
-import edu.ucla.cs.starai.forclift.util.LogOps._
-
-import cc.factorie.optimize._
 
 import org.scalatest.FunSpec
 import org.scalatest.Matchers
@@ -33,9 +30,10 @@ import org.scalatest.junit.JUnitRunner
 
 import java.io._
 import scala.io._
+import edu.ucla.cs.starai.forclift.util.Resource
 
 @RunWith(classOf[JUnitRunner])
-class BenchmarkUwcseBugs extends FunSpec with Matchers {
+class BenchmarkUwcseBugs extends FunSpec with Matchers with ResourceParseHelper {
 
   //--------------------------------------------------------------------------
   println("Running from directory:")
@@ -43,23 +41,13 @@ class BenchmarkUwcseBugs extends FunSpec with Matchers {
   var mln  = MLN()
   var db   = MLN()
 
-  def parse(mlnfile: String, dbfile: String): (MLN,MLN) = {
-    val parser = new MLNParser
-    parser.setLearnModus(true)
-    val mlnstring = Source.fromFile(mlnfile).mkString
-    val dbstring = Source.fromFile(dbfile).mkString
-
-    val mln = parser.parseMLN(mlnstring)
-    val db = parser.parseDB(dbstring)
-    (mln,db)
-  }
   //--------------------------------------------------------------------------
 
   describe("Uwcse bug1") {
 
     it("MLN and DB are parsable") {
-      parse("./src/benchmark/scala/liftedinference/benchmark/learning/uwcse/uwcse_bug1.mln",
-            "./src/benchmark/scala/liftedinference/benchmark/learning/uwcse/uwcse.0.db") match {
+      parse("/uwcse/uwcse_bug1.mln",
+            "/uwcse/uwcse.0.db") match {
         case (m,d) => mln=m;db=d
       }
     }

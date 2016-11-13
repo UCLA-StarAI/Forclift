@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-package liftedinference.benchmark.learning
+package edu.ucla.cs.starai.forclift.learning
 
 import edu.ucla.cs.starai.forclift._
 import edu.ucla.cs.starai.forclift.learning._
 import edu.ucla.cs.starai.forclift.languages.mln._
 import edu.ucla.cs.starai.forclift.inference._
-import edu.ucla.cs.starai.forclift.util.LogOps._
 
-import cc.factorie.optimize._
 
 import org.scalatest.FunSpec
 import org.scalatest.Matchers
@@ -33,9 +31,10 @@ import org.scalatest.junit.JUnitRunner
 
 import java.io._
 import scala.io._
+import edu.ucla.cs.starai.forclift.util.Resource
 
 @RunWith(classOf[JUnitRunner])
-class BenchmarkWebkbBugs extends FunSpec with Matchers {
+class BenchmarkWebkbBugs extends FunSpec with Matchers with ResourceParseHelper{
 
   //--------------------------------------------------------------------------
   println("Running from directory:")
@@ -43,23 +42,13 @@ class BenchmarkWebkbBugs extends FunSpec with Matchers {
   var mln  = MLN()
   var db   = MLN()
 
-  def parse(mlnfile: String, dbfile: String): (MLN,MLN) = {
-    val parser = new MLNParser
-    parser.setLearnModus(true)
-    val mlnstring = Source.fromFile(mlnfile).mkString
-    val dbstring = Source.fromFile(dbfile).mkString
-
-    val mln = parser.parseMLN(mlnstring)
-    val db = parser.parseDB(dbstring)
-    return (mln,db)
-  }
   //--------------------------------------------------------------------------
 
   describe("Webkb bug1") {
 
     it("MLN and DB are parsable") {
-      val (mln2,db2) = parse("./src/benchmark/scala/liftedinference/benchmark/learning/webkb/webkb_bug1.mln",
-                             "./src/benchmark/scala/liftedinference/benchmark/learning/webkb/corn20_bug1.db")
+      val (mln2,db2) = parse("/webkb/webkb_bug1.mln",
+                             "/webkb/corn20_bug1.db")
       mln = mln2
       db = db2
       println(mln)
@@ -75,8 +64,8 @@ class BenchmarkWebkbBugs extends FunSpec with Matchers {
   describe("Webkb bug2") {
 
     it("MLN and DB are parsable") {
-      val (mln2,db2) = parse("./src/benchmark/scala/liftedinference/benchmark/learning/webkb/webkb_bug2.mln",
-                             "./src/benchmark/scala/liftedinference/benchmark/learning/webkb/corn20_bug2.db")
+      val (mln2,db2) = parse("/webkb/webkb_bug2.mln",
+                             "/webkb/corn20_bug2.db")
       mln = mln2
       db = db2
     }
@@ -91,8 +80,8 @@ class BenchmarkWebkbBugs extends FunSpec with Matchers {
   describe("Webkb bug3") {
 
     it("MLN and DB are parsable") {
-      val (mln2,db2) = parse("./src/benchmark/scala/liftedinference/benchmark/learning/webkb/webkb_bug3.mln",
-                             "./src/benchmark/scala/liftedinference/benchmark/learning/webkb/corn20.db")
+      val (mln2,db2) = parse("/webkb/webkb_bug3.mln",
+                             "/webkb/corn20.db")
       mln = mln2
       db = db2
     }
@@ -107,8 +96,8 @@ class BenchmarkWebkbBugs extends FunSpec with Matchers {
   describe("Webkb bug4") {
 
     it("MLN and DB are parsable") {
-      val (mln2,db2) = parse("./src/benchmark/scala/liftedinference/benchmark/learning/webkb/webkb_bug4.mln",
-                             "./src/benchmark/scala/liftedinference/benchmark/learning/webkb/corn20.db")
+      val (mln2,db2) = parse("/webkb/webkb_bug4.mln",
+                             "/webkb/corn20.db")
       mln = mln2
       db = db2
     }
@@ -123,8 +112,8 @@ class BenchmarkWebkbBugs extends FunSpec with Matchers {
   describe("Webkb bug5") {
 
     it("MLN and DB are parsable") {
-      val (mln2,db2) = parse("./src/benchmark/scala/liftedinference/benchmark/learning/webkb/webkb_bug5.mln",
-                             "./src/benchmark/scala/liftedinference/benchmark/learning/webkb/corn20.db")
+      val (mln2,db2) = parse("/webkb/webkb_bug5.mln",
+                             "/webkb/corn20.db")
       mln = mln2
       db = db2
     }
