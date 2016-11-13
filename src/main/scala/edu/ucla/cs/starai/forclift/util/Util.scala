@@ -16,10 +16,13 @@
 
 package edu.ucla.cs.starai.forclift.util
 
-import scala.collection._
-import scala.language.implicitConversions
 import java.io.File
 import java.io.FileWriter
+import java.io.FileNotFoundException
+
+import scala.collection.mutable
+import scala.io.BufferedSource
+import scala.language.implicitConversions
 
 abstract class NameSpace[-I, O] {
 
@@ -98,4 +101,12 @@ object CacheStats {
     missCount += 1
     print
   }
+}
+
+object Resource{
+  
+  def fromFile(p: String): BufferedSource =
+    Option(getClass.getResourceAsStream(p)).map(scala.io.Source.fromInputStream)
+      .getOrElse(throw new FileNotFoundException("Resource " + p))
+
 }

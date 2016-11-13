@@ -32,6 +32,7 @@ import scala.io._
 import org.scalatest.FunSpec
 
 import edu.ucla.cs.starai.forclift.learning.LiftedLearning;
+import edu.ucla.cs.starai.forclift.util.Resource
 
 @RunWith(classOf[JUnitRunner])
 class TestWeightLearningUWCSEnoformulas extends FunSpec with Matchers {
@@ -269,11 +270,11 @@ Tempadvisedby(person,person)
 0 !Professor(a1) v Phase(a1,a2) v !Yearsinprogram(a1,a3)
 """
     // Database file for training
-    val db1String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/uwcse/uwcse_fold1.db")).mkString
-    val db2String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/uwcse/uwcse_fold2.db")).mkString
-    val db3String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/uwcse/uwcse_fold3.db")).mkString
-    val db4String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/uwcse/uwcse_fold4.db")).mkString
-    val db5String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/uwcse/uwcse_fold5.db")).mkString
+    val db1String = Resource.fromFile("/uwcse/uwcse_fold1.db").mkString
+    val db2String = Resource.fromFile("/uwcse/uwcse_fold2.db").mkString
+    val db3String = Resource.fromFile("/uwcse/uwcse_fold3.db").mkString
+    val db4String = Resource.fromFile("/uwcse/uwcse_fold4.db").mkString
+    val db5String = Resource.fromFile("/uwcse/uwcse_fold5.db").mkString
 
     var mln = MLN()
     var db1 = MLN()

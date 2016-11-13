@@ -27,12 +27,12 @@ class C2DError(msg: String) extends Exception(msg)
 
 abstract class AbstractC2D {
 
-  val dir = new File("wmcproblems")
+  val dir = new File("external/tmp/")
   dir.mkdir()
   val random = new util.Random()
-  var c2dInputFile = s"wmcproblems/wmcproblem.${random.nextLong}.cnf"
+  var c2dInputFile = s"external/tmp/wmcproblem.${random.nextLong}.cnf"
   while ((new File(c2dInputFile)).exists()) {
-	  c2dInputFile = s"wmcproblems/wmcproblem.${random.nextLong}.cnf"
+	  c2dInputFile = s"external/tmp/wmcproblem.${random.nextLong}.cnf"
   }
   //print("Creating file: %s" format c2dInputFile)
 

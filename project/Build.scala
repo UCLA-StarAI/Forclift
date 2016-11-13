@@ -34,6 +34,9 @@ import ProguardMerge.append
 
 import de.heikoseeberger.sbtheader.HeaderPlugin
 import de.heikoseeberger.sbtheader.license.Apache2_0
+import de.heikoseeberger.sbtheader.HeaderPattern
+
+import com.typesafe.sbteclipse.plugin.EclipsePlugin._
 
 
 object BuildSettings {
@@ -57,8 +60,7 @@ object BuildSettings {
           "-optimise"
   )
 
-  lazy val wfomcSettings =
-    Seq (
+  lazy val wfomcSettings = Seq (
       name         := buildName,
       organization := buildOrganization,
       scalaVersion := buildScalaVersion,
@@ -133,12 +135,21 @@ object BuildSettings {
         "java" -> Apache2_0("2016", "Jan Van Haaren (KU Leuven)")
       )
     )
+    
+  lazy val eclipseSettings = List(
+       EclipseKeys.createSrc := EclipseCreateSrc.Default + EclipseCreateSrc.ManagedClasses
+    )
+   
+  import ExtraCommands._
+  lazy val customCommands = Seq(dist,stats,upload)
+
+  lazy val createAllHeaders = addCommandAlias("createAllHeaders",       ";compile:createHeaders;test:createHeaders")
+
 }
 
 object WFOMCBuild extends Build {
 
   import BuildSettings._
-  import ExtraCommands._
 
   val wfomcDeps = Seq (
 	  // Scalatest for testing
@@ -159,10 +170,6 @@ object WFOMCBuild extends Build {
 	  // macro for generating equals/hashcode/canEqual
 	  // val scalaEquals =  "org.scalaequals" %% "scalaequals-core" % "1.2.0"
   )
-  
-  val customCommands = Seq(dist,stats,upload)
-
-  val createAllHeaders = addCommandAlias("createAllHeaders", ";compile:createHeaders;test:createHeaders")
 
   lazy val main = Project("main", file("."))
     .settings(Defaults.defaultSettings:_*)
@@ -176,7 +183,9 @@ object WFOMCBuild extends Build {
     .settings(proguardSettings: _*)
     .settings(assemblySettings: _*)
     .settings(headerSettings: _*)
+    .settings(headerSettings: _*)
     .settings(createAllHeaders: _*)
+    //.settings(eclipseSettings: _*)
 }
 
 
@@ -267,6 +276,4 @@ object ExtraCommands {
     state
   }
 }
-
-import de.heikoseeberger.sbtheader.HeaderPattern
 

@@ -31,6 +31,7 @@ import org.scalatest.FunSpec
 import org.scalatest.junit.JUnitRunner
 
 import edu.ucla.cs.starai.forclift.learning.LiftedLearning;
+import edu.ucla.cs.starai.forclift.util.Resource
 
 @RunWith(classOf[JUnitRunner])
 class TestWeightLearningWebKB2Monotone extends FunSpec with Matchers {
@@ -88,10 +89,10 @@ faculty(person)
 
 """
     // Database file for training
-    val db1String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/webkb2/fold1.db")).mkString
-    val db2String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/webkb2/fold2.db")).mkString
-    val db3String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/webkb2/fold3.db")).mkString
-    val db4String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/webkb2/fold4.db")).mkString
+    val db1String = Resource.fromFile("/webkb2/fold1.db").mkString
+    val db2String = Resource.fromFile("/webkb2/fold2.db").mkString
+    val db3String = Resource.fromFile("/webkb2/fold3.db").mkString
+    val db4String = Resource.fromFile("/webkb2/fold4.db").mkString
   
     var mln1 = MLN()
     var mln2 = MLN()

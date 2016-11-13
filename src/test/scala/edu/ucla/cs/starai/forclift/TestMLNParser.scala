@@ -25,6 +25,7 @@ import org.scalatest.junit.JUnitRunner
 import java.io._
 import scala.io._
 import edu.ucla.cs.starai.forclift.languages.mln._
+import edu.ucla.cs.starai.forclift.util.Resource
 
 @RunWith(classOf[JUnitRunner])
 class TestMLNParser extends FunSpec with Matchers {
@@ -218,7 +219,7 @@ test(person)
     val parser = new MLNParser
     val mlnString =
       """
-#include ./src/test/scala/liftedinference/examples/TestMLNIncludeStatement.mln
+#include ./src/test/resources/mlns/TestMLNIncludeStatement.mln
 """
     var mln = MLN()
 
@@ -1231,13 +1232,13 @@ Friends(x, y) => (Smokes(x) <=> Smokes(y))
     val parsere = new MLNParser
     parser.setLearnModus(true)
     parsere.setLearnModus(true)
-    val domFile = new File("./src/test/scala/liftedinference/examples/alchemy/univ-train.mln")
-    val mlnFile = new File("./src/test/scala/liftedinference/examples/alchemy/univ.mln")
-    val mlnString = Source.fromFile(domFile).mkString + Source.fromFile(mlnFile).mkString
-    val dbFile = new File("./src/test/scala/liftedinference/examples/alchemy/univ-train.db")
-    val dbString = Source.fromFile(dbFile).mkString
-    val mlneFile = new File("./src/test/scala/liftedinference/examples/alchemy/univ-extended.mln")
-    val mlneString = Source.fromFile(domFile).mkString + Source.fromFile(mlneFile).mkString
+    val domFile = Resource.fromFile("/univ/univ-train.mln").mkString
+    val mlnFile = Resource.fromFile("/univ/univ.mln").mkString
+    val mlnString = domFile + mlnFile
+    val dbFile = Resource.fromFile("/univ/univ-train.db").mkString
+    val dbString = dbFile
+    val mlneFile = Resource.fromFile("/univ/univ-extended.mln").mkString
+    val mlneString = domFile + mlneFile
 
     var mln = MLN()
     var mlne = MLN()

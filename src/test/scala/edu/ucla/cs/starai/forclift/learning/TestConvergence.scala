@@ -31,18 +31,20 @@ import scala.io._
 
 import org.scalatest.FunSpec
 
-import edu.ucla.cs.starai.forclift.learning.WeightLearning;
+import edu.ucla.cs.starai.forclift.util.Resource
 
 @RunWith(classOf[JUnitRunner])
 class TestConvergence extends FunSpec with Matchers {
 
   describe("Convergence bug") {
 
-    val theoryStr = Source.fromFile("./src/test/scala/liftedinference/learning/uwcse/convergencetest.mln").mkString
-    val dbs = Seq("./src/test/scala/liftedinference/learning/uwcse/uwcse_fold1.db",
-      "./src/test/scala/liftedinference/learning/uwcse/uwcse_fold3.db",
-      "./src/test/scala/liftedinference/learning/uwcse/uwcse_fold4.db",
-      "./src/test/scala/liftedinference/learning/uwcse/uwcse_fold5.db").map(f => Source.fromFile(f).mkString)
+    val theoryStr = Resource.fromFile("/uwcse/convergencetest.mln").mkString
+    val dbs = Seq(
+        "/uwcse/uwcse_fold1.db",
+        "/uwcse/uwcse_fold3.db",
+        "/uwcse/uwcse_fold4.db",
+        "/uwcse/uwcse_fold5.db")
+        .map(f => Resource.fromFile(f).mkString)
 
     val parser = new MLNParser
     parser.setLearnModus(true)

@@ -32,6 +32,7 @@ import edu.ucla.cs.starai.forclift.learning.LiftedLearning;
 import java.io._
 
 import scala.io._
+import edu.ucla.cs.starai.forclift.util.Resource
 
 @RunWith(classOf[JUnitRunner])
 class TestWeightLearningIMDB1 extends FunSpec with Matchers {
@@ -43,11 +44,9 @@ class TestWeightLearningIMDB1 extends FunSpec with Matchers {
     parser.setLearnModus(true)
     parsere.setLearnModus(true)
     // Smoking MLN
-    val mlnFile = new File("./src/test/scala/liftedinference/learning/imdb/imdb.bug1.mln")
-    val mlnString = Source.fromFile(mlnFile).mkString
+    val mlnString = Resource.fromFile("/imdb/imdb.bug1.mln").mkString
     // Database file for training
-    val dbFile = new File("./src/test/scala/liftedinference/learning/imdb/imdb.bug1.db")
-    val dbString = Source.fromFile(dbFile).mkString
+    val dbString = Resource.fromFile("/imdb/imdb.bug1.db").mkString
 
     var mln = MLN()
     var db = MLN()
@@ -96,11 +95,11 @@ film= {}
 !workedUnder(v0,v1) v actor(v0) v genre(v1,v2)
 """
     // Database file for training
-    val db1String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/imdb/imdb_fold1.db")).mkString
-    val db2String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/imdb/imdb_fold2.db")).mkString
-    val db3String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/imdb/imdb_fold3.db")).mkString
-    val db4String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/imdb/imdb_fold4.db")).mkString
-    val db5String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/imdb/imdb_fold5.db")).mkString
+    val db1String = Resource.fromFile("/imdb/imdb_fold1.db").mkString
+    val db2String = Resource.fromFile("/imdb/imdb_fold2.db").mkString
+    val db3String = Resource.fromFile("/imdb/imdb_fold3.db").mkString
+    val db4String = Resource.fromFile("/imdb/imdb_fold4.db").mkString
+    val db5String = Resource.fromFile("/imdb/imdb_fold5.db").mkString
 
     var mln = MLN()
     var db1 = MLN()
@@ -158,11 +157,11 @@ film= {}
 !workedUnder(v0,v1) v actor(v0) v genre(v1,v2)
 """
     // Database file for training
-    val db1String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/imdb/imdb_fold1.db")).mkString
-    val db2String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/imdb/imdb_fold2.db")).mkString
-    val db3String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/imdb/imdb_fold3.db")).mkString
-    val db4String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/imdb/imdb_fold4.db")).mkString
-    val db5String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/imdb/imdb_fold5.db")).mkString
+    val db1String = Resource.fromFile("/imdb/imdb_fold1.db").mkString
+    val db2String = Resource.fromFile("/imdb/imdb_fold2.db").mkString
+    val db3String = Resource.fromFile("/imdb/imdb_fold3.db").mkString
+    val db4String = Resource.fromFile("/imdb/imdb_fold4.db").mkString
+    val db5String = Resource.fromFile("/imdb/imdb_fold5.db").mkString
 
     var mln = MLN()
     var db1 = MLN()
@@ -209,11 +208,11 @@ actor(person)
 genre(a1,a2) v !genre(a1,a3)
 """
     // Database file for training
-    val db1String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/imdb/imdb_fold1.db")).mkString
-    val db2String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/imdb/imdb_fold2.db")).mkString
-    val db3String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/imdb/imdb_fold3.db")).mkString
-    val db4String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/imdb/imdb_fold4.db")).mkString
-    val db5String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/imdb/imdb_fold5.db")).mkString
+    val db1String = Resource.fromFile("/imdb/imdb_fold1.db").mkString
+    val db2String = Resource.fromFile("/imdb/imdb_fold2.db").mkString
+    val db3String = Resource.fromFile("/imdb/imdb_fold3.db").mkString
+    val db4String = Resource.fromFile("/imdb/imdb_fold4.db").mkString
+    val db5String = Resource.fromFile("/imdb/imdb_fold5.db").mkString
 
     var mln = MLN()
     var db1 = MLN()
@@ -267,7 +266,7 @@ type={}
 1.0409     workedUnder(a1,a2) v !workedUnder(a1,a3) v director(a3)
 """
     // Database file for training
-    val db5String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/imdb/imdb_fold5.db")).mkString
+    val db5String = Resource.fromFile("/imdb/imdb_fold5.db").mkString
 
     var mln = parser.parseMLN(mlnString)
     var db5 = parser.parseDB(db5String)

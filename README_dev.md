@@ -12,8 +12,8 @@ Compiling
 Testing and documentation
 -------------------------
 - `sbt test`               - Run tests
-- `sbt test-only liftedinference.TestMLNParser` - Run a single test
-- `sbt test-only *Parser*` - Run all tests that contain 'Parser'
+- `sbt 'test-only liftedinference.TestMLNParser'` - Run a single test (mind the quotes)
+- `sbt 'test-only *Parser*'` - Run all tests that contain 'Parser' (mind the quotes)
 - `sbt doc`                - Run scaladoc on sources
 - `sbt scoverage:test`     - Run code coverage of tests
 

@@ -30,15 +30,16 @@ import edu.ucla.cs.starai.forclift.learning.LiftedLearning;
 import java.io._
 
 import scala.io._
+import edu.ucla.cs.starai.forclift.util.Resource
 
 @RunWith(classOf[JUnitRunner])
 class TestLikelihoodImprovement extends FunSpec with Matchers {
 
-  val db1String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/imdb/imdb_fold1.db")).mkString
-  val db2String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/imdb/imdb_fold2.db")).mkString
-  val db3String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/imdb/imdb_fold3.db")).mkString
-  val db4String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/imdb/imdb_fold4.db")).mkString
-  val db5String = Source.fromFile(new File("./src/test/scala/liftedinference/learning/imdb/imdb_fold5.db")).mkString
+  val db1String = Resource.fromFile("/imdb/imdb_fold1.db").mkString
+  val db2String = Resource.fromFile("/imdb/imdb_fold2.db").mkString
+  val db3String = Resource.fromFile("/imdb/imdb_fold3.db").mkString
+  val db4String = Resource.fromFile("/imdb/imdb_fold4.db").mkString
+  val db5String = Resource.fromFile("/imdb/imdb_fold5.db").mkString
 
   describe("Fold 3") {
 
