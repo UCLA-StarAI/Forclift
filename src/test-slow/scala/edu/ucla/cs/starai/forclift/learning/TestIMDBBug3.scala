@@ -31,7 +31,7 @@ import java.io.File
 import edu.ucla.cs.starai.forclift.util.Resource
 
 @RunWith(classOf[JUnitRunner])
-class TestImdbWeightLearning extends FunSpec with Matchers with ResourceParseHelper {
+class TestImdbBug3 extends FunSpec with Matchers with ResourceParseHelper {
   
   //--------------------------------------------------------------------------
   println("Running from directory:")

@@ -17,11 +17,9 @@
 package edu.ucla.cs.starai.forclift.learning
 
 import org.junit.runner.RunWith
-import org.scalatest.BeforeAndAfter
 import org.scalatest.FunSpec
 import org.scalatest.Matchers
 import org.scalatest.junit.JUnitRunner
-
 import edu.ucla.cs.starai.forclift._
 import edu.ucla.cs.starai.forclift.inference._
 import edu.ucla.cs.starai.forclift.languages.mln._

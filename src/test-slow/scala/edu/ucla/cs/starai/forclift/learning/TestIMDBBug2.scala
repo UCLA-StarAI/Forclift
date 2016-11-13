@@ -33,7 +33,7 @@ import scala.io._
 import edu.ucla.cs.starai.forclift.util.Resource
 
 @RunWith(classOf[JUnitRunner])
-class BenchmarkWeightLearning extends FunSpec with Matchers {
+class TestIMDBBug2 extends FunSpec with Matchers {
 
     println("Running from directory:")
     println(System.getProperty("user.dir"))
