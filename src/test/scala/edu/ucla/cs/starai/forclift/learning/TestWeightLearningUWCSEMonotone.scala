@@ -31,6 +31,7 @@ import org.scalatest.FunSpec
 import org.scalatest.junit.JUnitRunner
 
 import edu.ucla.cs.starai.forclift.util.Resource
+import org.scalatest.tagobjects.Slow
 
 @RunWith(classOf[JUnitRunner])
 class TestWeightLearningUWCSEMonotone extends FunSpec with Matchers {
@@ -121,7 +122,7 @@ Tempadvisedby(person,person)
     db4 = parser.parseDB(db4String)
     db5 = parser.parseDB(db5String)
 
-    it("Small MLN is learnable") {
+    it("Small MLN is learnable", Slow) {
       val learner = new LiftedLearning(mln1, Seq(db1, db2, db3, db4), testdbMLNs=Seq(db5), 
     		  							verbose = true, normalizeLH = true)
       val (learnedMLN,ll) = learner.learnParameters()

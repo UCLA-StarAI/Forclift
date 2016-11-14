@@ -30,6 +30,7 @@ import java.io._
 
 import scala.io._
 import edu.ucla.cs.starai.forclift.util.Resource
+import org.scalatest.tagobjects.Slow
 
 @RunWith(classOf[JUnitRunner])
 class TestWeightLearningIMDB1 extends FunSpec with Matchers {
@@ -121,7 +122,7 @@ film= {}
       Databases.fromMLNs(mln, IndexedSeq(db1, db2, db3, db4))
     }
 
-    it("Learnable without normalization") {
+    it("Learnable without normalization", Slow) {
       val learner = new LiftedLearning(mln, Seq(db1, db2, db3, db4), verbose = false, normalizeLH = false)
       val learnedMLN = learner.learnParameters()
       println(learnedMLN)
