@@ -49,8 +49,8 @@ object BuildSettings {
   val jreTargetVersion  = "1.7"
   val buildVersion      = "3.1"
   val buildMainClass    = "edu.ucla.cs.starai.forclift.cli.CLI"
-  val buildJarName      = buildName+"-"+buildVersion+".jar"
-  val buildJarNameDebug = buildName+"-"+buildVersion+"-debug"+".jar"
+  val buildJarName      = buildName+".jar"
+  val buildJarNameDebug = buildName+"-debug"+".jar"
   val javacFlags = Seq("-source", jreTargetVersion, "-target", jreTargetVersion)
   val productionScalacFlags = Seq(
           "-target:jvm-"+jreTargetVersion,   
@@ -145,7 +145,7 @@ object BuildSettings {
   lazy val docSettings = LaikaPlugin.defaults ++ Seq()
    
   import ExtraCommands._
-  lazy val customCommands = Seq(dist,stats,upload)
+  lazy val customCommands = Seq(dist,stats)
 
   lazy val createAllHeaders = addCommandAlias("createAllHeaders",       ";compile:createHeaders;test:createHeaders")
 
@@ -226,58 +226,22 @@ object ExtraCommands {
     println("Copying sbt. " + ("mkdir -p "+distdir+"/project" !!))
     println("Copying sbt. " + ("cp project/Build.scala "+distdir+"/project/" !!))
     println("Copying sbt. " + ("cp project/plugin.sbt " +distdir+"/project/" !!))
-    //println("Copying pom. " + ("cp pom.xml "+distdir !!))
-    //println("Copying jar. " + ("cp target/wfomc-1.0.jar "+distdir+"/" !!))
     println("Copying jar. " + ("cp target/scala-"+BuildSettings.buildScalaVersionMajor+"/proguard/"+BuildSettings.buildName+"_"+BuildSettings.buildScalaVersionMajor+"-"+BuildSettings.buildVersion+".jar "+distdir+"/"+BuildSettings.buildJarName !!))
-    //println("Copying jar. " + ("cp target/scala-"+BuildSettings.buildScalaVersion+"/wfomc_"+BuildSettings.buildScalaVersion+"-"+BuildSettings.buildVersion+".min.jar "+distdir+"/"+BuildSettings.buildJarName !!))
     println("Copying README.md. "  + ("cp README.md " +distdir+"/" !!))
     println("Copying README_dev.md. "  + ("cp README_dev.md " +distdir+"/" !!))
     println("Copying LICENSE. " + ("cp LICENSE "+distdir+"/" !!))
-    println(("mkdir -p "+distdir+"/doc" !!))
-    println("Copying docs. " + ("cp doc/wfomc_manual.html "+distdir+"/doc/" !!))
-    println("Copying docs. " + ("cp doc/wfomc_manual.pdf  "+distdir+"/doc/" !!))
     println("Copying models. " + ("cp -R models  "+distdir+"/" !!))
-    //println("Copying example models (wmc).\n" + ("find models -name *.wmc -print -exec cp {} "+distdir+"/models/ ;" !!))
-    //println("Copying example models (mln).\n" + ("find models -name *.mln -print -exec cp {} "+distdir+"/models/ ;" !!))
-    //println("Copying example models (fg).\n"  + ("find models -name *.fg  -print -exec cp {} "+distdir+"/models/ ;" !!))
-    //println("Copying source code.\n" + ("find . -name *.scala -print -exec cp {} "+distdir+"/$(dirname {})/ ;" ))
-    //println("Copying source code.\n" + ("find . -name *.scala -print -exec cp {} "+distdir+"/$(dirname {})/ ;" !!))
-    val base = new File(".")
-    val srcfiles = ((base / "src") ** "*.scala").get
-    srcfiles.foreach{ f =>
-      if (!f.getAbsolutePath().contains("bugs")) {
-        println(("mkdir -p " + distdir+"/"+f.getParent() !!))
-        println("Copying Scala source files " + ("cp "+f+" "+distdir+"/"+f !!))
-      }
-    }
-    val srcfilesj = ((base / "src") ** "*.java").get
-    srcfilesj.foreach{ f =>
-      if (!f.getAbsolutePath().contains("bugs")) {
-        println(("mkdir -p " + distdir+"/"+f.getParent() !!))
-        println("Copying Java source files " + ("cp "+f+" "+distdir+"/"+f !!))
-      }
-    }
-    val xmlfiles = ((base / "src" / "main" / "assembly") ** "*.xml").get
-    xmlfiles.foreach{ f =>
-      println(("mkdir -p " + distdir+"/"+f.getParent() !!))
-      println("Copying xml files " + ("cp "+f+" "+distdir+"/"+f !!))
-    }
+    println("Copying source code. " + ("cp -R src  "+distdir+"/" !!))
     println("Making zip. " + ("zip -r "+distdir+".zip "+distdir !!))
     println("Created "+distdir+".zip")
     state
   }
 
+  /* is this still used? */
   def dist_debug = Command.command("dist") { state =>
     println("Distribution is not allowed in debug mode. Switch to the main project ('project main')")
     state
   }
 
-  def upload = Command.command("upload") { state =>
-    val distdir = BuildSettings.buildName+"-"+BuildSettings.buildVersion
-    println("Copying to server.")
-    println(("scp "+distdir+".zip ssh.cs.kuleuven.be:/cw/vwww/dtai/public_html/WFOMC/" !!))
-    println("Copied.")
-    state
-  }
 }
 
