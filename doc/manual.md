@@ -1,30 +1,18 @@
-
-
-
-
-
-
-
-
-
-
-
-
-WFOMC is an experimental tool to perform weighted model counting in a lifted
+Forclift is an experimental tool to perform weighted model counting in a lifted
 manner. The tool is compatible with Markov Logic and Factor Graphs.
 
-***** Table of Contents *****
+## Table of Contents
 
-***** Usage *****
+## Usage
 Usage:
-java -jar ./wfomc.jar [OPTIONS] input
+`java -jar ./forclift.jar [OPTIONS] input`
 For example, to perform inference on the example model sickdeath.fg for the
 query death, you use the following command:
-java -jar ./wfomc.jar -q "death" models/sickdeath.fg
+`java -jar ./forclift.jar -q "death" models/sickdeath.fg`
 MLNs can be queried as follows:
-java -jar ./wfomc.jar -q "smokes(Guy)" models/friendsmoker.mln
+`java -jar ./forclift.jar -q "smokes(Guy)" models/friendsmoker.mln`
 
-**** Options ****
+### Options
 Input files:
 --fg             Force to read in file as a factor graph model
 --mln            Force to read in file as MLN model
@@ -54,7 +42,7 @@ Settings:
 Veryfication and feedback:
 --pdf     Create a pdf visualizing the smoothed NNF. Requires pdflatex and
           graphviz dot to be in your path and the dot2texi package installed.
-          Verify the result of wfomc using the c2d compiler of Darwiche. The
+          Verify the result of forclift using the c2d compiler of Darwiche. The
 --verify  c2d compiler command can be set with environment variable C2DCMD
           (default: ./c2d_linux).
 --verbose Verbose output on command line and in pdf
@@ -66,7 +54,7 @@ Various:
 -h     Show help about the available flags.
 --help
 
-**** Input formats ****
+## Input formats
 WFOMC supports three types of input formats. Internally, all formats are
 translated to the weighted model counting format:
     * Weighted Model Counting format as defined below.
@@ -82,7 +70,7 @@ translated to the weighted model counting format:
     * Factor Graphs format as defined for FOPI.
       The extension .fg is associated with this filetype.
 
-**** Dependencies ****
+## Dependencies
     * For verifying the correctness of the results:
           o c2d_compiler: Adnan Darwiche's c2d compiler.
             Used for propositional inference and verification. The binary is
@@ -103,23 +91,25 @@ translated to the weighted model counting format:
           o Breeze: Used for optimization and complex numbers (Apache 2.0
             License)
 
-***** Download *****
-The WFOMC binaries can be downloaded from http://dtai.cs.kuleuven.be/wfomc/.
+## Download
+The WFOMC binaries can be downloaded from http://dtai.cs.kuleuven.be/forclift/.
 Installing is not necessary, the zip-file contains a runnable jar-file.
 
-***** Weighted Model Counting Input Format *****
+## Weighted Model Counting Input Format
 More information about the semantics can be found in the publications mentioned
 below. A theory consists out of three parts:
     * Domain declarations
     * Predicate declarations
     * Formulas
-**** Domain Declarations ****
+    
+### Domain Declarations
 domain {Name} {size} \{{DomainElements}\}
 Where Name is the name of the domain and should start with a capital letter and
 has a given size, size. It is also possible to give some domain elements
 explicitely by name as a comma separated list in DomainElements. For example,
 domain D 10 {}
-**** Predicate Declarations ****
+
+### Predicate Declarations
 predicate {predicate} {TrueWeight} {FalseWeight}
 Where a predicate consists out of a predicate name (lowercase first letter) and
 optionally some arguments (e.g., f(D,D)). A weight can be given for when the
@@ -127,7 +117,8 @@ predicate is true, TrueWeight, and when it is false, FalseWeight. For example,
 predicate p(D)
 predicate r
 predicate f(D,D) 0.51 1
-**** Formulas ****
+
+### Formulas
 The third part are the first-order formulas, one per line, in CNF. Optionally
 you can add domain constraints to a line separated by a comma. Logic variables
 should start with a capital letter.
@@ -144,7 +135,7 @@ p(X)  v !f(X,Y)              , X != Y
 p(Y)  v !f(X,Y)              , X != Y
 r     v !f(X,Y)              , X != Y
 
-***** Tutorial on Inference *****
+## Tutorial on Inference
 # Example theory file
 $ cat models/friendsmoker.mln
 person = {Guy, Nima, Wannes, Jesse, Luc}
@@ -153,7 +144,7 @@ Smokes(person)
 2 Friends(x,y) ^ Smokes(x) => Smokes(y)
 
 # Run a query on the theory
-$ java -jar ./wfomc.jar -q "Smokes(Guy)" ./models/friendsmoker.mln
+$ java -jar ./forclift.jar -q "Smokes(Guy)" ./models/friendsmoker.mln
 Reading file using MLN syntax.
 Compilation took 815 ms
 evidence nnf size = 18
@@ -168,24 +159,25 @@ query logWmc = 67.94594092663222 = log(3.225129904188057E29)
 P(Some(Smokes(Guy))) = 0.49999999999999906
 
 # Visualize the circuit in a pdf
-$ java -jar ./wfomc-.jar --pdf ./models/friendsmoker.mln
+$ java -jar ./forclift-.jar --pdf ./models/friendsmoker.mln
 $ open ./nnfs/theory.smooth.nnf.pdf
 
 # Visualize the circuit in a pdf in a verbose way (show all steps)
-$ java -jar ./wfomc.jar --pdf --verbose ./models/friendsmoker.mln
+$ java -jar ./forclift.jar --pdf --verbose ./models/friendsmoker.mln
 $ open ./nnfs/theory.smooth.nnf.pdf
  [img/theory.smooth.nnf.nonverbose.png] Part of the visualization of the
 compilation of friendsmokers (non-verbose).   [img/
 theory.smooth.nnf.verbose.png] Part of the visualization of the compilation of
 friendsmokers (verbose).
-***** Tutorial on Learning *****
+
+## Tutorial on Learning
 To learn the weights of a theory, use the --wl flag and indicate the training
 database(s) with the --train flag.
-$ java -jar ./wfomc.jar --mln-dist --wl
+$ java -jar ./forclift.jar --mln-dist --wl
     --train models/learning/smoking/smoking-train.db
     models/learning/smoking/smoking.mln
 
-***** Publications *****
+## Publications
 The algorithms implemented are explained in the following publications:
     * G. Van den Broeck, W. Meert and A. Adnan. Skolemization for Weighted
       First-Order Model Counting.
@@ -227,8 +219,8 @@ The algorithms implemented are explained in the following publications:
       Intelligence (IJCAI), 2011.
       https://lirias.kuleuven.be/handle/123456789/308265
 
-***** Contact *****
-http://dtai.cs.kuleuven.be/wfomc/
+## Contact
+http://dtai.cs.kuleuven.be/forclift/
 Main contact:
 Contributors:
     * Guy_Van_den_Broeck
@@ -236,7 +228,7 @@ Contributors:
     * Jesse_Davis
     * Jan_Van_Haaren
 
-***** License *****
+## License
 The Lesser GNU Public License, Version 3.0
 http://www.gnu.org/licenses/lgpl-3.0.txt
 Copyright (c) 2011-2013, KU Leuven. All rights reserved.
