@@ -44,7 +44,7 @@ object BuildSettings {
   
   val buildName         = "forclift"
   val buildOrganization = "edu.ucla.cs.starai"
-  val buildScalaVersion = "2.11.2"
+  val buildScalaVersion = "2.11.5"
   val buildScalaVersionMajor = "2.11"
   val jreTargetVersion  = "1.7"
   val buildVersion      = "3.1"
@@ -65,7 +65,7 @@ object BuildSettings {
           "-optimise"
   )
 
-  lazy val wfomcSettings = Seq (
+  lazy val appSettings = Seq (
       name         := buildName,
       organization := buildOrganization,
       scalaVersion := buildScalaVersion,
@@ -112,20 +112,20 @@ object BuildSettings {
   )
 
   lazy val proguardSettings =  SbtProguard.proguardSettings ++ Seq(
-      ProguardKeys.proguardVersion in Proguard := "5.3.1",
+      ProguardKeys.proguardVersion in Proguard := "5.3",
       options in Proguard += keepMain(buildMainClass),
-      options in Proguard ++= Seq("-dontnote", "-dontwarn", "-ignorewarnings"),
-      options in Proguard += """-dontoptimize""",
-      options in Proguard += """-dontobfuscate""",
+      options in Proguard += "-dontnote",
+      options in Proguard += "-dontwarn",
+      options in Proguard += "-ignorewarnings",
+      options in Proguard += "-dontoptimize",
+      options in Proguard += "-dontobfuscate",
+      options in Proguard += "-keepattributes *Annotation*",
+      options in Proguard += "-keepattributes Signature",
+      options in Proguard += "-keepattributes InnerClasses",
+      options in Proguard += "-keepattributes EnclosingMethod",
       ProguardKeys.inputFilter in Proguard := { file =>
-        val filter = file.name match {
-            case f if f.contains("wfomc") => {
-                None
-            }
-            case _ => Some("!**.html,!**.css,!**.gif,!META-INF/**")
-        }
-        println("file: "+file+" filter: "+filter)
-        filter
+        // remove embedded documentation
+        Some("!**.html,!**.css,!**.gif,!META-INF/**")
       },
       // Make the jar first such that a manifest is generated
       exportJars := true,
@@ -151,11 +151,11 @@ object BuildSettings {
 
 }
 
-object WFOMCBuild extends Build {
+object ForcliftBuild extends Build {
 
   import BuildSettings._
 
-  val wfomcDeps = Seq (
+  val dependencies = Seq (
 	  // Scalatest for testing
 	  "org.scalatest" % "scalatest_2.11" % "2.2.2" % "test",
 	  // Mix in junit layer on top on scalatest (for eclipse)
@@ -177,9 +177,9 @@ object WFOMCBuild extends Build {
 
   lazy val main = Project("main", file("."))
     .settings(Defaults.defaultSettings:_*)
-    .settings(libraryDependencies := wfomcDeps)
+    .settings(libraryDependencies := dependencies)
     .settings(commands ++= customCommands)
-    .settings(wfomcSettings:_*)
+    .settings(appSettings:_*)
     .settings(compileSettings:_*)
     .settings(testSettings:_*)
     .settings(sCoverageSettings: _*)
@@ -189,6 +189,7 @@ object WFOMCBuild extends Build {
     .settings(headerSettings: _*)
     .settings(createAllHeaders: _*)
     .settings(docSettings: _*)
+    
 }
 
 

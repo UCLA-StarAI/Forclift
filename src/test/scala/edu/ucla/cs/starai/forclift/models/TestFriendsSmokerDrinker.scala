@@ -16,13 +16,9 @@
 
 package edu.ucla.cs.starai.forclift.examples.models
 
-import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
-import org.scalatest.Matchers
-import org.scalatest.Spec
-
-import edu.ucla.cs.starai.forclift.examples.models.FriendsSmokerDrinkerModel;
-import edu.ucla.cs.starai.forclift._
+import org.scalatest.Finders
+import org.scalatest.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
 class TestFriendsSmokerDrinker1 extends ModelBehaviours {
@@ -42,7 +38,7 @@ class TestFriendsSmokerDrinker1 extends ModelBehaviours {
   describe("FriendsSmokerDrinkerModel of size 200") {
     val correctLogWMC = 42312.99807235724 +- 0.00001
     val model = new FriendsSmokerDrinkerModel(200)
-    it should behave like bigModel(model, correctLogWMC)
+    it should behave like slowBigModel(model, correctLogWMC)
   }
 }
 

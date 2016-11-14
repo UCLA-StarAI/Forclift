@@ -20,9 +20,18 @@ import org.scalatest.Spec
 import org.scalatest.Matchers
 import org.scalatest.FunSpec
 import org.scalactic.TripleEqualsSupport.Spread
+import org.scalatest.tagobjects.Slow
 
 trait ModelBehaviours extends FunSpec with Matchers {
 
+  def slowBigModel(model: StringModel, correctLogWmc: Spread[Double]) {
+
+    it("should have the correct lifted WMC", Slow) {
+      model.theory.logSmoothWmc.logToDouble should be(correctLogWmc)
+    }
+
+  }
+  
   def bigModel(model: StringModel, correctLogWmc: Spread[Double]) {
 
     it("should have the correct lifted WMC") {

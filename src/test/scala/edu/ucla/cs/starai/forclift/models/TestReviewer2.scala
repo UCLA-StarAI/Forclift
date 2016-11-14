@@ -16,13 +16,9 @@
 
 package edu.ucla.cs.starai.forclift.examples.models
 
-import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
-import org.scalatest.Matchers
-import org.scalatest.Spec
-
-import edu.ucla.cs.starai.forclift.examples.models.Reviewer2Model;
-import edu.ucla.cs.starai.forclift._
+import org.scalatest.Finders
+import org.scalatest.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
 class TestReviewer2 extends ModelBehaviours {

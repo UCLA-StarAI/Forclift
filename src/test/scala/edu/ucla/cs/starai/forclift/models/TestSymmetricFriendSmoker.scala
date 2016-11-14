@@ -16,14 +16,8 @@
 
 package edu.ucla.cs.starai.forclift.examples.models
 
-import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
-import org.scalatest.Matchers
-import org.scalatest.Spec
-
-import edu.ucla.cs.starai.forclift.examples.models.SymmetricFriendsSmokerModel;
-import edu.ucla.cs.starai.forclift._
-import edu.ucla.cs.starai.forclift.examples.models._
+import org.scalatest.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
 class TestSymmetricFriendsSmoker extends ModelBehaviours {
