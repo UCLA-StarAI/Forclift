@@ -37,6 +37,7 @@ import de.heikoseeberger.sbtheader.license.Apache2_0
 import de.heikoseeberger.sbtheader.HeaderPattern
 
 import com.typesafe.sbteclipse.plugin.EclipsePlugin._
+import laika.sbt.LaikaSbtPlugin.LaikaPlugin
 
 
 object BuildSettings {
@@ -138,6 +139,8 @@ object BuildSettings {
         "java" -> Apache2_0("2016", "Jan Van Haaren (KU Leuven)")
       )
     )
+
+  lazy val docSettings = LaikaPlugin.defaults ++ Seq()
    
   import ExtraCommands._
   lazy val customCommands = Seq(dist,stats,upload)
@@ -183,6 +186,7 @@ object WFOMCBuild extends Build {
     .settings(headerSettings: _*)
     .settings(headerSettings: _*)
     .settings(createAllHeaders: _*)
+    .settings(docSettings: _*)
 }
 
 

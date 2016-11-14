@@ -11,11 +11,12 @@ Compiling
 
 Testing and documentation
 -------------------------
-- `sbt test`               - Run tests
+- `sbt test`                      - Run tests
 - `sbt 'test-only liftedinference.TestMLNParser'` - Run a single test (mind the quotes)
-- `sbt 'test-only *Parser*'` - Run all tests that contain 'Parser' (mind the quotes)
-- `sbt doc`                - Run scaladoc on sources
-- `sbt scoverage:test`     - Run code coverage of tests
+- `sbt 'test-only *Parser*'`      - Run all tests that contain 'Parser' (mind the quotes)
+- `sbt doc`                       - Run scaladoc on sources
+- `sbt 'laika:generate html pdf'` - Generate website and pdf from markdown manual
+- `sbt scoverage:test`            - Run code coverage of tests
 
 Note: `sbt test` has assertions disabled; `sbt scoverage:test` has assertions enabled.
 

@@ -16,3 +16,6 @@ addSbtPlugin("org.scoverage" %% "sbt-scoverage" % "0.99.7.1")
 
 addSbtPlugin("de.heikoseeberger" % "sbt-header" % "1.5.0")
 
+addSbtPlugin("org.planet42" % "laika-sbt" % "0.6.0")
+
+
