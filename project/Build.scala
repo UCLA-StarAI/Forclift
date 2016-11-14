@@ -46,11 +46,11 @@ object BuildSettings {
   val buildOrganization = "edu.ucla.cs.starai"
   val buildScalaVersion = "2.11.2"
   val buildScalaVersionMajor = "2.11"
+  val jreTargetVersion  = "1.7"
   val buildVersion      = "3.1"
   val buildMainClass    = "edu.ucla.cs.starai.forclift.cli.CLI"
   val buildJarName      = buildName+"-"+buildVersion+".jar"
   val buildJarNameDebug = buildName+"-"+buildVersion+"-debug"+".jar"
-  val jreTargetVersion  = "1.7"
   val javacFlags = Seq("-source", jreTargetVersion, "-target", jreTargetVersion)
   val productionScalacFlags = Seq(
           "-target:jvm-"+jreTargetVersion,   
@@ -87,7 +87,9 @@ object BuildSettings {
       // enable assertions and optimize in test binaries
       scalacOptions in Test := testScalacFlags,
       // do not run tests tagged as 'Slow'
-      testOptions in Test += Tests.Argument("-l", "org.scalatest.tags.Slow")
+      testOptions in Test += Tests.Argument("-l", "org.scalatest.tags.Slow"),
+      // disable parallel testing in an atempt to avoid spurious test errors
+      parallelExecution in Test := false
   )
     
   lazy val sCoverageSettings = instrumentSettings ++ Seq(
