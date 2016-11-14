@@ -16,24 +16,18 @@
 
 package edu.ucla.cs.starai.forclift.languages
 
+import org.junit.runner.RunWith
+import org.scalatest.FunSpec
+import org.scalatest.Matchers
 import org.scalatest.junit.JUnitRunner
 
-import edu.ucla.cs.starai.forclift.languages.mln._
-
-import org.junit.runner.RunWith
-import org.scalatest.Matchers
-import org.scalatest.Spec
-
-import edu.ucla.cs.starai.forclift._
-
-import java.io._
-
-import scala.io._
-
-import org.scalatest.Matchers
-import org.scalatest.FunSpec
-
-import edu.ucla.cs.starai.forclift.languages.FastInfFormat;
+import edu.ucla.cs.starai.forclift.Atom
+import edu.ucla.cs.starai.forclift.Constant
+import edu.ucla.cs.starai.forclift.PositiveUnitClause
+import edu.ucla.cs.starai.forclift.Predicate
+import edu.ucla.cs.starai.forclift.RootDomain
+import edu.ucla.cs.starai.forclift.Var
+import edu.ucla.cs.starai.forclift.languages.mln.MLNParser
 
 @RunWith(classOf[JUnitRunner])
 class TestFastInfFormat extends FunSpec with Matchers {

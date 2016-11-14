@@ -852,7 +852,7 @@ class MLNParser extends JavaTokenParsers with ModelParser {
     }
   }
 
-  @deprecated("no longer in use?")
+  @deprecated("no longer in use?","3.0")
   def parseMLNWithDB(mlnStr: String, dbStr: String, useExplicitConstants: Boolean = false): MLN = {
     //println("Start MLN parsing")
     // The .mln file contains the MLN for inference

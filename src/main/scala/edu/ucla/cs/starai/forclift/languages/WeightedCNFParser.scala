@@ -25,7 +25,7 @@ import edu.ucla.cs.starai.forclift.constraints._
 import edu.ucla.cs.starai.forclift.languages._
 import edu.ucla.cs.starai.forclift.inference._
 
-@deprecated("Weighted CNF file format is being removed")
+@deprecated("Weighted CNF file format is being removed","3.0")
 class WeightedCNFParser extends JavaTokenParsers {
 
   /**
@@ -37,7 +37,7 @@ class WeightedCNFParser extends JavaTokenParsers {
 
   def parseStringWMC(str: String, compilerBuilder: Compiler.Builder = Compiler.Builder.default): WeightedCNF = parseWeightedCNF(Source.fromString(str), compilerBuilder)
 
-  @deprecated("Weighted CNF file format is being removed")
+  @deprecated("Weighted CNF file format is being removed","3.0")
   def parseWeightedCNF(source: Source, compilerBuilder: Compiler.Builder = Compiler.Builder.default): WeightedCNF = {
     val cnf = parseCNF(source)
     WeightedCNF(cnf, domainSizes, predicateWeights, compilerBuilder = compilerBuilder)

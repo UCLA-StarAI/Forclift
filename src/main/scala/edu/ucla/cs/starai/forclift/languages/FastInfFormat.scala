@@ -323,7 +323,7 @@ class FastInfFormat(
     out.write("@DirectedMeasures\n@End\n\n")
   }
   
-  @deprecated("use toString instead")
+  @deprecated("use toString instead","3.0")
   def toFile(out: FileWriter) = {
     out.write("# Translation to FastInf from Markov Logic using WFOMC\n#\n\n")
     variablesToFile(out)

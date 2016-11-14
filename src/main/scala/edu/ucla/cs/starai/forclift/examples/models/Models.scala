@@ -50,7 +50,7 @@ trait FactorGraphModel extends StringModel {
 }
 
 
-@deprecated("Weighted CNF file format is being removed")
+@deprecated("Weighted CNF file format is being removed","3.0")
 trait WeightedCNFModel extends StringModel {
 
   def theoryString: String
