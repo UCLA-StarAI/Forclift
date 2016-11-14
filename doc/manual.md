@@ -62,8 +62,7 @@ MLNs can be queried as follows:
 
 
 ## Input formats
-WFOMC supports three types of input formats. Internally, all formats are
-translated to the weighted model counting format:
+WFOMC supports three types of input formats. Internally, all formats are translated to the weighted model counting format:
 
 - Weighted Model Counting format as defined below.
       The extension `.wmc` is associated with this filetype.
@@ -77,9 +76,7 @@ translated to the weighted model counting format:
 
 * For verifying the correctness of the results:
     - `c2d_linux`: Adnan Darwiche's c2d compiler.
-    Used for propositional inference and verification. The binary is
-    assumed to be installed as ./c2d_linux. This can be overridden with
-    the environment variable C2DCMD.
+    Used for propositional inference and verification. The binary is assumed to be installed as `./c2d_linux`. This can be overridden with the environment variable `C2DCMD`.
 * For visualizing the circuits:
     - `pdflatex` is assumed to be in your path.
     - `dot2tex` is assumed to be in your path.
