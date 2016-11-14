@@ -44,7 +44,7 @@ object BuildSettings {
   
   val buildName         = "forclift"
   val buildOrganization = "edu.ucla.cs.starai"
-  val buildScalaVersion = "2.11.5"
+  val buildScalaVersion = "2.11.8"
   val buildScalaVersionMajor = "2.11"
   val jreTargetVersion  = "1.7"
   val buildVersion      = "3.1"
@@ -124,7 +124,7 @@ object BuildSettings {
       options in Proguard += "-keepattributes InnerClasses",
       options in Proguard += "-keepattributes EnclosingMethod",
       ProguardKeys.inputFilter in Proguard := { file =>
-        // remove embedded documentation
+        // remove embedded documentation and manifests
         Some("!**.html,!**.css,!**.gif,!META-INF/**")
       },
       // Make the jar first such that a manifest is generated
