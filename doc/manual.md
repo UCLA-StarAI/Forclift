@@ -181,8 +181,6 @@ Part of the visualization of the compilation of friendsmokers (verbose)
 
 <center><img src="img/theory.smooth.nnf.verbose.png?raw=true" width="500"></center>
 
-![](img/theory.smooth.nnf.verbose.png?raw=true  =250x)
-
 ## Tutorial on Learning
 
 To learn the weights of a theory, use the `--wl` flag and indicate the training
