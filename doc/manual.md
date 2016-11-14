@@ -172,8 +172,10 @@ For example:
 
 	$ java -jar ./forclift.jar --pdf --verbose ./models/friendsmoker.mln
 	$ open ./nnfs/theory.smooth.nnf.pdf
-	[img/theory.smooth.nnf.nonverbose.png] Part of the visualization of the compilation of friendsmokers (non-verbose).   
-	[img/theory.smooth.nnf.verbose.png] Part of the visualization of the compilation of friendsmokers (verbose).
+	
+![Compact Circuit](img/theory.smooth.nnf.nonverbose.png?raw=true "Part of the visualization of the compilation of friendsmokers (non-verbose)")
+
+![Verbose Circuit](img/theory.smooth.nnf.verbose.png?raw=true "Part of the visualization of the compilation of friendsmokers (verbose)")
 
 ## Tutorial on Learning
 
