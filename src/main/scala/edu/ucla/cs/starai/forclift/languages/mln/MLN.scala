@@ -752,7 +752,7 @@ case class MLN(
    *         2: Right implication
    */
   def toWeightedCNFWithoutSplitting(verbose: Boolean = false,
-    skolemize: Boolean = false,
+    skolemize: Boolean = true,
     transformation: Int = 0,
     earlySk: Boolean = true): WeightedCNF = {
 
